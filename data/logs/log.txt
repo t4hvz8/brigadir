@@ -1,0 +1,1182 @@
+2026-02-08 18:12:52,438 - \U0001f310 Bot is running
+2026-02-08 18:12:52,442 - Start polling
+2026-02-08 18:12:52,707 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-08 18:12:58,504 - Константин from Omsk press start
+2026-02-08 18:12:58,792 - Update id=648812110 is handled. Duration 288 ms by bot id=7139072705
+2026-02-08 18:13:02,139 - Update id=648812111 is handled. Duration 208 ms by bot id=7139072705
+2026-02-08 18:13:03,759 - Update id=648812112 is handled. Duration 193 ms by bot id=7139072705
+2026-02-08 18:13:07,509 - Update id=648812113 is handled. Duration 197 ms by bot id=7139072705
+2026-02-08 18:13:13,008 - Update id=648812114 is not handled. Duration 93 ms by bot id=7139072705
+2026-02-08 18:13:13,009 - Cause exception while process update id=648812114 by bot id=7139072705
+ValueError: not enough values to unpack (expected 3, got 1)
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 944, in process_callback
+    who_add, to_whom_name, task = result
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 3, got 1)
+2026-02-08 18:15:42,314 - Polling stopped
+2026-02-08 18:15:42,573 - Polling stopped for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-08 18:15:47,996 - \U0001f310 Bot is running
+2026-02-08 18:15:48,000 - Start polling
+2026-02-08 18:15:48,292 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-08 18:15:49,538 - Константин from Omsk press start
+2026-02-08 18:15:49,842 - Update id=648812115 is handled. Duration 305 ms by bot id=7139072705
+2026-02-08 18:15:51,531 - Update id=648812116 is handled. Duration 227 ms by bot id=7139072705
+2026-02-08 18:15:53,027 - Update id=648812117 is handled. Duration 214 ms by bot id=7139072705
+2026-02-08 18:15:55,558 - Update id=648812118 is handled. Duration 208 ms by bot id=7139072705
+2026-02-08 18:15:57,060 - Update id=648812119 is handled. Duration 230 ms by bot id=7139072705
+2026-02-08 18:15:58,219 - Update id=648812120 is handled. Duration 212 ms by bot id=7139072705
+2026-02-08 18:15:59,616 - Update id=648812121 is handled. Duration 202 ms by bot id=7139072705
+2026-02-08 18:16:01,780 - Update id=648812122 is handled. Duration 268 ms by bot id=7139072705
+2026-02-08 18:16:11,872 - Update id=648812123 is handled. Duration 1926 ms by bot id=7139072705
+2026-02-08 18:16:29,960 - Update id=648812124 is not handled. Duration 5662 ms by bot id=7139072705
+2026-02-08 18:16:29,960 - Cause exception while process update id=648812124 by bot id=7139072705
+OperationalError: database is locked
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 958, in process_callback
+    cur.execute(f'UPDATE tasks SET status = ? WHERE id = {task_id}', ['finish'])
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: database is locked
+2026-02-08 18:17:41,725 - Polling stopped
+2026-02-08 18:17:41,989 - Polling stopped for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-08 18:17:47,327 - \U0001f310 Bot is running
+2026-02-08 18:17:47,331 - Start polling
+2026-02-08 18:17:47,602 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-08 18:18:02,578 - Константин from Omsk press start
+2026-02-08 18:18:02,875 - Update id=648812125 is handled. Duration 298 ms by bot id=7139072705
+2026-02-08 18:18:04,429 - Update id=648812126 is handled. Duration 230 ms by bot id=7139072705
+2026-02-08 18:18:06,114 - Update id=648812127 is handled. Duration 391 ms by bot id=7139072705
+2026-02-08 18:18:08,034 - Update id=648812128 is handled. Duration 361 ms by bot id=7139072705
+2026-02-08 18:18:09,946 - Update id=648812129 is handled. Duration 196 ms by bot id=7139072705
+2026-02-08 18:18:18,193 - Update id=648812130 is not handled. Duration 337 ms by bot id=7139072705
+2026-02-08 18:18:18,193 - Cause exception while process update id=648812130 by bot id=7139072705
+OperationalError: no such column: finish
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 1067, in finish_task
+    save_finish_photo(user_id, region, task_id)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 1500, in save_finish_photo
+    cur.execute(f'UPDATE tasks SET finish = ? WHERE id = {task_id}', [task_finish])
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: finish
+2026-02-08 18:19:06,056 - Константин from Omsk press start
+2026-02-08 18:19:06,475 - Update id=648812131 is handled. Duration 419 ms by bot id=7139072705
+2026-02-08 18:19:08,009 - Update id=648812132 is handled. Duration 305 ms by bot id=7139072705
+2026-02-08 18:19:09,750 - Update id=648812133 is handled. Duration 200 ms by bot id=7139072705
+2026-02-08 18:19:10,811 - Update id=648812134 is handled. Duration 201 ms by bot id=7139072705
+2026-02-08 18:19:12,037 - Update id=648812135 is handled. Duration 215 ms by bot id=7139072705
+2026-02-08 18:19:19,038 - Update id=648812136 is handled. Duration 1494 ms by bot id=7139072705
+2026-02-08 18:19:23,568 - Update id=648812137 is not handled. Duration 238 ms by bot id=7139072705
+2026-02-08 18:19:23,568 - Cause exception while process update id=648812137 by bot id=7139072705
+TelegramBadRequest: Telegram server says - Bad Request: there is no text in the message to edit
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 965, in process_callback
+    sent_message = await callback_query.message.edit_text (f"Задание отмечено принятым\n{text}", parse_mode="HTML", disable_web_page_preview=True)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\methods\base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\bot.py", line 498, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\session\base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\session\aiohttp.py", line 185, in make_request
+    response = self.check_response(
+        bot=bot, method=method, status_code=resp.status, content=raw_result
+    )
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\session\base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: there is no text in the message to edit
+2026-02-08 18:23:04,518 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:23:06,600 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:23:08,119 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:23:10,367 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:24:08,104 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:24:09,864 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:24:10,900 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:24:12,123 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:24:19,124 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:26:47,279 - Polling stopped
+2026-02-08 18:26:47,538 - Polling stopped for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-08 18:26:52,903 - \U0001f310 Bot is running
+2026-02-08 18:26:52,907 - Start polling
+2026-02-08 18:26:53,161 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-08 18:26:54,378 - Константин from Omsk press start
+2026-02-08 18:26:54,671 - Update id=648812138 is handled. Duration 294 ms by bot id=7139072705
+2026-02-08 18:26:56,193 - Update id=648812139 is handled. Duration 340 ms by bot id=7139072705
+2026-02-08 18:26:58,143 - Update id=648812140 is handled. Duration 233 ms by bot id=7139072705
+2026-02-08 18:26:59,204 - Update id=648812141 is handled. Duration 193 ms by bot id=7139072705
+2026-02-08 18:27:01,215 - Update id=648812142 is handled. Duration 201 ms by bot id=7139072705
+2026-02-08 18:27:08,639 - Update id=648812143 is not handled. Duration 825 ms by bot id=7139072705
+2026-02-08 18:27:08,639 - Cause exception while process update id=648812143 by bot id=7139072705
+TelegramBadRequest: Telegram server says - Bad Request: message to delete not found
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 1079, in finish_task
+    await message.delete()
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\methods\base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\bot.py", line 498, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\session\base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\session\aiohttp.py", line 185, in make_request
+    response = self.check_response(
+        bot=bot, method=method, status_code=resp.status, content=raw_result
+    )
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\session\base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:27:19,161 - Update id=648812144 is handled. Duration 421 ms by bot id=7139072705
+2026-02-08 18:28:24,053 - Константин from Omsk press start
+2026-02-08 18:28:24,266 - Update id=648812145 is handled. Duration 213 ms by bot id=7139072705
+2026-02-08 18:28:25,545 - Update id=648812146 is handled. Duration 188 ms by bot id=7139072705
+2026-02-08 18:28:28,349 - Update id=648812147 is handled. Duration 208 ms by bot id=7139072705
+2026-02-08 18:28:34,081 - Update id=648812148 is handled. Duration 195 ms by bot id=7139072705
+2026-02-08 18:28:35,635 - Update id=648812149 is handled. Duration 298 ms by bot id=7139072705
+2026-02-08 18:28:52,962 - Update id=648812150 is not handled. Duration 4341 ms by bot id=7139072705
+2026-02-08 18:28:52,962 - Cause exception while process update id=648812150 by bot id=7139072705
+TelegramBadRequest: Telegram server says - Bad Request: message to delete not found
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 1079, in finish_task
+    await message.delete()
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\methods\base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\bot.py", line 498, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\session\base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\session\aiohttp.py", line 185, in make_request
+    response = self.check_response(
+        bot=bot, method=method, status_code=resp.status, content=raw_result
+    )
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\session\base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:29:06,426 - Update id=648812151 is handled. Duration 403 ms by bot id=7139072705
+2026-02-08 18:30:19,911 - Polling stopped
+2026-02-08 18:30:20,165 - Polling stopped for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-08 18:30:25,935 - \U0001f310 Bot is running
+2026-02-08 18:30:25,938 - Start polling
+2026-02-08 18:30:26,199 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-08 18:31:31,396 - Update id=648812152 is handled. Duration 297 ms by bot id=7139072705
+2026-02-08 18:31:33,080 - Update id=648812153 is handled. Duration 105 ms by bot id=7139072705
+2026-02-08 18:32:23,059 - Екатерина from Omsk press start
+2026-02-08 18:32:23,170 - Update id=648812154 is handled. Duration 182 ms by bot id=7139072705
+2026-02-08 18:32:25,129 - Update id=648812155 is handled. Duration 230 ms by bot id=7139072705
+2026-02-08 18:32:26,761 - Update id=648812156 is handled. Duration 203 ms by bot id=7139072705
+2026-02-08 18:32:36,011 - [('900865796', 'Константин'), ('5139344216', 'Екатерина')]____Константин________900865796
+2026-02-08 18:32:36,011 - [('900865796', 'Константин'), ('5139344216', 'Екатерина')]____Екатерина________5139344216
+2026-02-08 18:32:36,175 - Update id=648812157 is handled. Duration 362 ms by bot id=7139072705
+2026-02-08 18:32:39,303 - Update id=648812158 is handled. Duration 627 ms by bot id=7139072705
+2026-02-08 18:32:44,947 - Update id=648812159 is handled. Duration 426 ms by bot id=7139072705
+2026-02-08 18:32:51,645 - Update id=648812160 is handled. Duration 247 ms by bot id=7139072705
+2026-02-08 18:32:57,832 - Update id=648812161 is handled. Duration 783 ms by bot id=7139072705
+2026-02-08 18:33:12,773 - Update id=648812162 is not handled. Duration 4950 ms by bot id=7139072705
+2026-02-08 18:33:12,773 - Cause exception while process update id=648812162 by bot id=7139072705
+TelegramBadRequest: Telegram server says - Bad Request: message to delete not found
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 1079, in finish_task
+    await message.delete()
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\methods\base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\bot.py", line 498, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\session\base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\session\aiohttp.py", line 185, in make_request
+    response = self.check_response(
+        bot=bot, method=method, status_code=resp.status, content=raw_result
+    )
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\session\base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:33:22,123 - Update id=648812163 is handled. Duration 491 ms by bot id=7139072705
+2026-02-08 18:34:17,665 - Екатерина from Omsk press start
+2026-02-08 18:34:17,770 - Update id=648812164 is handled. Duration 105 ms by bot id=7139072705
+2026-02-08 18:34:20,192 - Update id=648812165 is handled. Duration 873 ms by bot id=7139072705
+2026-02-08 18:34:22,035 - Update id=648812166 is handled. Duration 187 ms by bot id=7139072705
+2026-02-08 18:34:31,871 - [('900865796', 'Константин'), ('5139344216', 'Екатерина')]____Константин________900865796
+2026-02-08 18:34:31,871 - [('900865796', 'Константин'), ('5139344216', 'Екатерина')]____Екатерина________5139344216
+2026-02-08 18:34:31,986 - Update id=648812167 is handled. Duration 210 ms by bot id=7139072705
+2026-02-08 18:34:34,501 - Update id=648812168 is handled. Duration 228 ms by bot id=7139072705
+2026-02-08 18:35:09,437 - Update id=648812169 is handled. Duration 465 ms by bot id=7139072705
+2026-02-08 18:35:26,434 - Update id=648812170 is handled. Duration 240 ms by bot id=7139072705
+2026-02-08 18:35:30,757 - Update id=648812171 is handled. Duration 206 ms by bot id=7139072705
+2026-02-08 18:35:41,212 - Update id=648812172 is not handled. Duration 2742 ms by bot id=7139072705
+2026-02-08 18:35:41,212 - Cause exception while process update id=648812172 by bot id=7139072705
+TelegramBadRequest: Telegram server says - Bad Request: message to delete not found
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 1079, in finish_task
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\methods\base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\bot.py", line 498, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\session\base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\session\aiohttp.py", line 185, in make_request
+    response = self.check_response(
+        bot=bot, method=method, status_code=resp.status, content=raw_result
+    )
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\session\base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:37:25,218 - Не удалось удалить сообщение 5139344216: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:37:26,841 - Не удалось удалить сообщение 5139344216: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:37:36,264 - Не удалось удалить сообщение 5139344216: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:37:39,398 - Не удалось удалить сообщение 5139344216: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:37:44,275 - Update id=648812173 is handled. Duration 498 ms by bot id=7139072705
+2026-02-08 18:37:45,041 - Не удалось удалить сообщение 5139344216: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:37:45,634 - Update id=648812174 is handled. Duration 183 ms by bot id=7139072705
+2026-02-08 18:37:47,615 - Update id=648812175 is handled. Duration 195 ms by bot id=7139072705
+2026-02-08 18:37:51,300 - Update id=648812176 is handled. Duration 1277 ms by bot id=7139072705
+2026-02-08 18:37:57,773 - Update id=648812177 is handled. Duration 1519 ms by bot id=7139072705
+2026-02-08 18:37:57,925 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:38:01,157 - Update id=648812178 is handled. Duration 304 ms by bot id=7139072705
+2026-02-08 18:38:15,994 - Update id=648812179 is handled. Duration 1854 ms by bot id=7139072705
+2026-02-08 18:38:26,422 - Update id=648812180 is handled. Duration 1621 ms by bot id=7139072705
+2026-02-08 18:38:38,043 - Константин from Omsk press start
+2026-02-08 18:38:38,191 - Update id=648812181 is handled. Duration 149 ms by bot id=7139072705
+2026-02-08 18:38:40,064 - Константин from Omsk press start
+2026-02-08 18:38:40,171 - Update id=648812182 is handled. Duration 107 ms by bot id=7139072705
+2026-02-08 18:38:41,892 - Update id=648812183 is handled. Duration 319 ms by bot id=7139072705
+2026-02-08 18:38:43,279 - Update id=648812184 is handled. Duration 193 ms by bot id=7139072705
+2026-02-08 18:38:46,319 - Update id=648812185 is handled. Duration 1643 ms by bot id=7139072705
+2026-02-08 18:38:53,781 - Update id=648812186 is handled. Duration 1244 ms by bot id=7139072705
+2026-02-08 18:38:57,203 - Update id=648812187 is handled. Duration 306 ms by bot id=7139072705
+2026-02-08 18:39:10,080 - Update id=648812188 is handled. Duration 2011 ms by bot id=7139072705
+2026-02-08 18:39:20,277 - Не удалось удалить сообщение 5139344216: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:39:22,140 - Не удалось удалить сообщение 5139344216: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:39:32,076 - Не удалось удалить сообщение 5139344216: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:39:34,591 - Не удалось удалить сообщение 5139344216: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:40:09,522 - Не удалось удалить сообщение 5139344216: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:40:26,521 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:40:30,843 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:42:44,364 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:42:45,731 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:42:51,116 - Константин from Omsk press start
+2026-02-08 18:42:51,224 - Update id=648812189 is handled. Duration 108 ms by bot id=7139072705
+2026-02-08 18:42:51,386 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:42:57,892 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:43:01,682 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:43:05,152 - Екатерина from Omsk press start
+2026-02-08 18:43:05,300 - Update id=648812190 is handled. Duration 149 ms by bot id=7139072705
+2026-02-08 18:43:07,648 - Update id=648812191 is handled. Duration 320 ms by bot id=7139072705
+2026-02-08 18:43:09,094 - Update id=648812192 is handled. Duration 199 ms by bot id=7139072705
+2026-02-08 18:43:16,085 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:43:18,185 - [('900865796', 'Константин'), ('5139344216', 'Екатерина')]____Константин________900865796
+2026-02-08 18:43:18,185 - [('900865796', 'Константин'), ('5139344216', 'Екатерина')]____Екатерина________5139344216
+2026-02-08 18:43:18,725 - Update id=648812193 is handled. Duration 637 ms by bot id=7139072705
+2026-02-08 18:43:20,596 - Update id=648812194 is handled. Duration 286 ms by bot id=7139072705
+2026-02-08 18:43:24,104 - Update id=648812195 is handled. Duration 598 ms by bot id=7139072705
+2026-02-08 18:43:26,507 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:43:32,635 - Update id=648812196 is handled. Duration 194 ms by bot id=7139072705
+2026-02-08 18:43:35,857 - Update id=648812197 is handled. Duration 372 ms by bot id=7139072705
+2026-02-08 18:43:38,278 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:43:40,255 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:43:42,176 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:43:44,268 - Update id=648812198 is not handled. Duration 2927 ms by bot id=7139072705
+2026-02-08 18:43:44,268 - Cause exception while process update id=648812198 by bot id=7139072705
+TelegramBadRequest: Telegram server says - Bad Request: message to delete not found
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 1079, in finish_task
+    board.add(types.InlineKeyboardButton(text="\u21aa\ufe0fГлавное меню\u21a9\ufe0f", callback_data="OK"))
+    ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\methods\base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\bot.py", line 498, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\session\base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\session\aiohttp.py", line 185, in make_request
+    response = self.check_response(
+        bot=bot, method=method, status_code=resp.status, content=raw_result
+    )
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\client\session\base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:43:46,410 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:43:49,599 - Update id=648812199 is handled. Duration 494 ms by bot id=7139072705
+2026-02-08 18:43:53,905 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:43:58,431 - Polling stopped
+2026-02-08 18:43:58,692 - Polling stopped for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-08 18:44:03,815 - \U0001f310 Bot is running
+2026-02-08 18:44:03,819 - Start polling
+2026-02-08 18:44:04,099 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-08 18:44:06,968 - Екатерина from Omsk press start
+2026-02-08 18:44:07,262 - Update id=648812200 is handled. Duration 295 ms by bot id=7139072705
+2026-02-08 18:44:09,084 - Update id=648812201 is handled. Duration 229 ms by bot id=7139072705
+2026-02-08 18:44:10,699 - Update id=648812202 is handled. Duration 194 ms by bot id=7139072705
+2026-02-08 18:44:20,363 - [('900865796', 'Константин'), ('5139344216', 'Екатерина')]____Константин________900865796
+2026-02-08 18:44:20,364 - [('900865796', 'Константин'), ('5139344216', 'Екатерина')]____Екатерина________5139344216
+2026-02-08 18:44:20,466 - Update id=648812203 is handled. Duration 198 ms by bot id=7139072705
+2026-02-08 18:44:22,448 - Update id=648812204 is handled. Duration 226 ms by bot id=7139072705
+2026-02-08 18:44:25,604 - Update id=648812205 is handled. Duration 780 ms by bot id=7139072705
+2026-02-08 18:44:29,378 - Update id=648812206 is handled. Duration 197 ms by bot id=7139072705
+2026-02-08 18:44:39,243 - Update id=648812207 is handled. Duration 349 ms by bot id=7139072705
+2026-02-08 18:44:45,621 - Update id=648812208 is handled. Duration 843 ms by bot id=7139072705
+2026-02-08 18:44:55,412 - Update id=648812209 is handled. Duration 3447 ms by bot id=7139072705
+2026-02-08 18:45:05,735 - Update id=648812210 is handled. Duration 519 ms by bot id=7139072705
+2026-02-08 18:45:10,954 - Update id=648812211 is handled. Duration 198 ms by bot id=7139072705
+2026-02-08 18:45:13,119 - Update id=648812212 is handled. Duration 658 ms by bot id=7139072705
+2026-02-08 18:45:15,398 - Update id=648812213 is handled. Duration 422 ms by bot id=7139072705
+2026-02-08 18:45:20,198 - Update id=648812214 is handled. Duration 233 ms by bot id=7139072705
+2026-02-08 18:45:22,704 - Update id=648812215 is handled. Duration 502 ms by bot id=7139072705
+2026-02-08 18:45:35,414 - Update id=648812216 is handled. Duration 3198 ms by bot id=7139072705
+2026-02-08 18:45:39,529 - Update id=648812217 is handled. Duration 505 ms by bot id=7139072705
+2026-02-08 18:45:55,071 - Константин from Omsk press start
+2026-02-08 18:45:55,218 - Update id=648812218 is handled. Duration 148 ms by bot id=7139072705
+2026-02-08 18:45:57,256 - Update id=648812219 is handled. Duration 388 ms by bot id=7139072705
+2026-02-08 18:45:58,869 - Update id=648812220 is handled. Duration 217 ms by bot id=7139072705
+2026-02-08 18:46:01,840 - Update id=648812221 is handled. Duration 250 ms by bot id=7139072705
+2026-02-08 18:46:03,935 - Update id=648812222 is handled. Duration 274 ms by bot id=7139072705
+2026-02-08 18:46:11,527 - Update id=648812223 is handled. Duration 3618 ms by bot id=7139072705
+2026-02-08 18:46:14,526 - Update id=648812224 is handled. Duration 611 ms by bot id=7139072705
+2026-02-08 18:46:27,916 - Константин from Omsk press start
+2026-02-08 18:46:28,054 - Update id=648812225 is handled. Duration 138 ms by bot id=7139072705
+2026-02-08 18:46:30,310 - Update id=648812226 is handled. Duration 370 ms by bot id=7139072705
+2026-02-08 18:46:31,945 - Update id=648812227 is handled. Duration 655 ms by bot id=7139072705
+2026-02-08 18:46:34,640 - Update id=648812228 is handled. Duration 261 ms by bot id=7139072705
+2026-02-08 18:46:36,086 - Update id=648812229 is handled. Duration 194 ms by bot id=7139072705
+2026-02-08 18:46:43,607 - Update id=648812230 is handled. Duration 3079 ms by bot id=7139072705
+2026-02-08 18:46:45,284 - Update id=648812231 is handled. Duration 528 ms by bot id=7139072705
+2026-02-08 18:46:49,190 - Константин from Omsk press start
+2026-02-08 18:46:49,349 - Update id=648812232 is handled. Duration 160 ms by bot id=7139072705
+2026-02-08 18:46:51,327 - Update id=648812233 is handled. Duration 194 ms by bot id=7139072705
+2026-02-08 18:46:52,886 - Update id=648812234 is handled. Duration 318 ms by bot id=7139072705
+2026-02-08 18:46:54,519 - Update id=648812235 is handled. Duration 564 ms by bot id=7139072705
+2026-02-08 18:46:56,500 - Update id=648812236 is handled. Duration 644 ms by bot id=7139072705
+2026-02-08 18:47:03,826 - Update id=648812237 is handled. Duration 3375 ms by bot id=7139072705
+2026-02-08 18:47:05,785 - Update id=648812238 is handled. Duration 518 ms by bot id=7139072705
+2026-02-08 18:49:09,173 - Не удалось удалить сообщение 5139344216: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:49:10,787 - Не удалось удалить сообщение 5139344216: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:49:20,554 - Не удалось удалить сообщение 5139344216: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:49:22,534 - Не удалось удалить сообщение 5139344216: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:49:25,710 - Не удалось удалить сообщение 5139344216: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:49:29,480 - Не удалось удалить сообщение 5139344216: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:49:45,712 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-08 18:49:53,473 - Polling stopped
+2026-02-08 18:49:53,736 - Polling stopped for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-08 18:49:59,608 - \U0001f310 Bot is running
+2026-02-08 18:49:59,613 - Start polling
+2026-02-08 18:49:59,922 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-08 18:50:07,129 - Екатерина from Omsk press start
+2026-02-08 18:50:07,415 - Update id=648812239 is handled. Duration 287 ms by bot id=7139072705
+2026-02-08 18:50:24,785 - Update id=648812240 is handled. Duration 262 ms by bot id=7139072705
+2026-02-08 18:50:26,277 - Update id=648812241 is handled. Duration 237 ms by bot id=7139072705
+2026-02-08 18:50:33,421 - Update id=648812242 is handled. Duration 190 ms by bot id=7139072705
+2026-02-08 18:50:35,369 - Update id=648812243 is handled. Duration 224 ms by bot id=7139072705
+2026-02-08 18:50:38,163 - Update id=648812244 is handled. Duration 1173 ms by bot id=7139072705
+2026-02-08 18:50:50,897 - Update id=648812245 is handled. Duration 183 ms by bot id=7139072705
+2026-02-08 18:50:57,464 - Update id=648812246 is handled. Duration 235 ms by bot id=7139072705
+2026-02-08 18:51:07,435 - Update id=648812247 is handled. Duration 2772 ms by bot id=7139072705
+2026-02-08 18:51:14,101 - Update id=648812248 is handled. Duration 220 ms by bot id=7139072705
+2026-02-08 18:51:20,174 - Update id=648812249 is not handled. Duration 100 ms by bot id=7139072705
+2026-02-08 18:51:20,174 - Cause exception while process update id=648812249 by bot id=7139072705
+OperationalError: row value misused
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 959, in process_callback
+    cur.execute(f'UPDATE tasks SET status = ?, time_end = ? WHERE id = {task_id, formatted_time}', ['finish'])
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: row value misused
+2026-02-08 18:51:24,591 - Update id=648812250 is handled. Duration 424 ms by bot id=7139072705
+2026-02-08 18:51:48,039 - Polling stopped
+2026-02-08 18:51:48,300 - Polling stopped for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-08 18:51:53,729 - \U0001f310 Bot is running
+2026-02-08 18:51:53,732 - Start polling
+2026-02-08 18:51:54,028 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-08 18:51:55,273 - Update id=648812251 is handled. Duration 406 ms by bot id=7139072705
+2026-02-08 18:51:56,910 - Update id=648812252 is handled. Duration 237 ms by bot id=7139072705
+2026-02-08 18:51:58,431 - Update id=648812253 is handled. Duration 220 ms by bot id=7139072705
+2026-02-08 18:52:00,980 - Update id=648812254 is handled. Duration 652 ms by bot id=7139072705
+2026-02-08 18:52:09,371 - Update id=648812255 is handled. Duration 1991 ms by bot id=7139072705
+2026-02-08 18:52:15,095 - Update id=648812256 is handled. Duration 753 ms by bot id=7139072705
+2026-02-08 18:52:27,593 - Константин from Omsk press start
+2026-02-08 18:52:27,724 - Update id=648812257 is handled. Duration 132 ms by bot id=7139072705
+2026-02-08 18:52:29,902 - Update id=648812258 is handled. Duration 592 ms by bot id=7139072705
+2026-02-08 18:52:31,229 - Update id=648812259 is handled. Duration 268 ms by bot id=7139072705
+2026-02-08 18:52:33,043 - Update id=648812260 is handled. Duration 247 ms by bot id=7139072705
+2026-02-08 18:52:34,500 - Update id=648812261 is handled. Duration 371 ms by bot id=7139072705
+2026-02-08 18:52:46,046 - Update id=648812262 is handled. Duration 1998 ms by bot id=7139072705
+2026-02-08 18:52:49,757 - Update id=648812263 is not handled. Duration 408 ms by bot id=7139072705
+2026-02-08 18:52:49,757 - Cause exception while process update id=648812263 by bot id=7139072705
+OperationalError: row value misused
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 959, in process_callback
+    cur.execute(f'UPDATE tasks SET status = ?, time_end = ? WHERE id = {task_id, formatted_time}', ['finish'])
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: row value misused
+2026-02-08 18:52:54,776 - Update id=648812264 is not handled. Duration 90 ms by bot id=7139072705
+2026-02-08 18:52:54,776 - Cause exception while process update id=648812264 by bot id=7139072705
+OperationalError: row value misused
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 959, in process_callback
+    cur.execute(f'UPDATE tasks SET status = ?, time_end = ? WHERE id = {task_id, formatted_time}', ['finish'])
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: row value misused
+2026-02-08 18:52:56,287 - Update id=648812265 is not handled. Duration 94 ms by bot id=7139072705
+2026-02-08 18:52:56,287 - Cause exception while process update id=648812265 by bot id=7139072705
+OperationalError: row value misused
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 959, in process_callback
+    cur.execute(f'UPDATE tasks SET status = ?, time_end = ? WHERE id = {task_id, formatted_time}', ['finish'])
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: row value misused
+2026-02-08 18:52:57,122 - Update id=648812266 is not handled. Duration 117 ms by bot id=7139072705
+2026-02-08 18:52:57,122 - Cause exception while process update id=648812266 by bot id=7139072705
+OperationalError: row value misused
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 959, in process_callback
+    cur.execute(f'UPDATE tasks SET status = ?, time_end = ? WHERE id = {task_id, formatted_time}', ['finish'])
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: row value misused
+2026-02-08 18:52:58,140 - Update id=648812267 is not handled. Duration 99 ms by bot id=7139072705
+2026-02-08 18:52:58,140 - Cause exception while process update id=648812267 by bot id=7139072705
+OperationalError: row value misused
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 959, in process_callback
+    cur.execute(f'UPDATE tasks SET status = ?, time_end = ? WHERE id = {task_id, formatted_time}', ['finish'])
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: row value misused
+2026-02-08 18:53:51,560 - Polling stopped
+2026-02-08 18:53:51,822 - Polling stopped for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-08 18:54:02,288 - \U0001f310 Bot is running
+2026-02-08 18:54:02,291 - Start polling
+2026-02-08 18:54:02,565 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-08 18:54:10,218 - Константин from Omsk press start
+2026-02-08 18:54:10,486 - Update id=648812268 is handled. Duration 268 ms by bot id=7139072705
+2026-02-08 18:54:12,524 - Update id=648812269 is handled. Duration 244 ms by bot id=7139072705
+2026-02-08 18:54:19,566 - Update id=648812270 is handled. Duration 84 ms by bot id=7139072705
+2026-02-08 18:54:23,341 - Update id=648812271 is handled. Duration 196 ms by bot id=7139072705
+2026-02-08 18:54:24,649 - Update id=648812272 is handled. Duration 303 ms by bot id=7139072705
+2026-02-08 18:54:26,849 - Update id=648812273 is handled. Duration 668 ms by bot id=7139072705
+2026-02-08 18:54:35,528 - Update id=648812274 is handled. Duration 2245 ms by bot id=7139072705
+2026-02-08 18:54:52,354 - Update id=648812275 is handled. Duration 873 ms by bot id=7139072705
+2026-02-08 18:54:59,532 - Екатерина from Omsk press start
+2026-02-08 18:54:59,645 - Update id=648812276 is handled. Duration 113 ms by bot id=7139072705
+2026-02-08 18:55:01,448 - Update id=648812277 is handled. Duration 181 ms by bot id=7139072705
+2026-02-08 18:55:06,538 - Update id=648812278 is handled. Duration 0 ms by bot id=7139072705
+2026-02-08 18:55:08,734 - Update id=648812279 is handled. Duration 194 ms by bot id=7139072705
+2026-02-08 18:55:10,191 - Update id=648812280 is handled. Duration 195 ms by bot id=7139072705
+2026-02-08 18:55:11,591 - Update id=648812281 is handled. Duration 485 ms by bot id=7139072705
+2026-02-08 18:55:29,769 - Update id=648812282 is handled. Duration 593 ms by bot id=7139072705
+2026-02-08 18:55:31,960 - Update id=648812283 is handled. Duration 198 ms by bot id=7139072705
+2026-02-08 18:55:33,917 - Update id=648812284 is handled. Duration 424 ms by bot id=7139072705
+2026-02-08 18:55:41,608 - Update id=648812285 is handled. Duration 236 ms by bot id=7139072705
+2026-02-08 18:55:45,347 - Update id=648812286 is handled. Duration 188 ms by bot id=7139072705
+2026-02-08 18:55:54,277 - Update id=648812287 is handled. Duration 3140 ms by bot id=7139072705
+2026-02-08 18:56:00,971 - Update id=648812288 is handled. Duration 936 ms by bot id=7139072705
+2026-02-08 18:56:10,342 - Константин from Omsk press start
+2026-02-08 18:56:10,442 - Update id=648812289 is handled. Duration 100 ms by bot id=7139072705
+2026-02-08 18:56:12,989 - Update id=648812290 is handled. Duration 503 ms by bot id=7139072705
+2026-02-08 18:56:16,959 - Update id=648812291 is handled. Duration 178 ms by bot id=7139072705
+2026-02-08 18:56:18,448 - Update id=648812292 is handled. Duration 204 ms by bot id=7139072705
+2026-02-08 18:56:20,167 - Update id=648812293 is handled. Duration 474 ms by bot id=7139072705
+2026-02-08 18:56:27,914 - Update id=648812294 is handled. Duration 2435 ms by bot id=7139072705
+2026-02-08 18:56:36,635 - Update id=648812295 is handled. Duration 514 ms by bot id=7139072705
