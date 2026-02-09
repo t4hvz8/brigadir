@@ -1676,7 +1676,7 @@ def check_personal(region):
         text = ""
         for position_tuple in result_position:
             position = position_tuple[0]
-            result_employees = cur.execute(f'SELECT id FROM employees WHERE position = ?', [position]).fetchall()
+            result_employees = cur.execute(f'SELECT id FROM employees WHERE position = ? AND status = "active"', [position]).fetchall()
             data = len(result_employees)
             text += f'<i><u>{position}</u> - {data}</i>\n'
             logging.info(f"{text}")   

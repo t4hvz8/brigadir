@@ -2094,3 +2094,65 @@ sqlite3.ProgrammingError: Error binding parameter 1: type 'tuple' is not support
 2026-02-09 16:53:49,020 - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
 2026-02-09 16:53:49,020 - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8507138416)
 2026-02-09 16:53:49,277 - Polling stopped for bot @brig_tools_bot id=8507138416 - 'brig_bot'
+2026-02-09 20:27:23,084 - \U0001f310 Bot is running
+2026-02-09 20:27:23,092 - Start polling
+2026-02-09 20:27:23,454 - Run polling for bot @brig_tools_bot id=8507138416 - 'brig_bot'
+2026-02-09 20:27:28,120 - Константин from Omsk press start
+2026-02-09 20:27:28,122 - [('Логистика ПР',), ('Оператор УП',), ('ВАП',), ('Пив. производство ПР',), ('Слесарь по ремонту погрузчиков',), ('Архивариус',), ('Специалист по производственным процессам',)]
+2026-02-09 20:27:28,125 - <i><u>Логистика ПР</u> - 37</i>
+
+2026-02-09 20:27:28,126 - <i><u>Логистика ПР</u> - 37</i>
+<i><u>Оператор УП</u> - 22</i>
+
+2026-02-09 20:27:28,126 - <i><u>Логистика ПР</u> - 37</i>
+<i><u>Оператор УП</u> - 22</i>
+<i><u>ВАП</u> - 20</i>
+
+2026-02-09 20:27:28,126 - <i><u>Логистика ПР</u> - 37</i>
+<i><u>Оператор УП</u> - 22</i>
+<i><u>ВАП</u> - 20</i>
+<i><u>Пив. производство ПР</u> - 2</i>
+
+2026-02-09 20:27:28,126 - <i><u>Логистика ПР</u> - 37</i>
+<i><u>Оператор УП</u> - 22</i>
+<i><u>ВАП</u> - 20</i>
+<i><u>Пив. производство ПР</u> - 2</i>
+<i><u>Слесарь по ремонту погрузчиков</u> - 1</i>
+
+2026-02-09 20:27:28,126 - <i><u>Логистика ПР</u> - 37</i>
+<i><u>Оператор УП</u> - 22</i>
+<i><u>ВАП</u> - 20</i>
+<i><u>Пив. производство ПР</u> - 2</i>
+<i><u>Слесарь по ремонту погрузчиков</u> - 1</i>
+<i><u>Архивариус</u> - 1</i>
+
+2026-02-09 20:27:28,126 - <i><u>Логистика ПР</u> - 37</i>
+<i><u>Оператор УП</u> - 22</i>
+<i><u>ВАП</u> - 20</i>
+<i><u>Пив. производство ПР</u> - 2</i>
+<i><u>Слесарь по ремонту погрузчиков</u> - 1</i>
+<i><u>Архивариус</u> - 1</i>
+<i><u>Специалист по производственным процессам</u> - 1</i>
+
+2026-02-09 20:27:29,052 - Update id=566390201 is handled. Duration 937 ms by bot id=8507138416
+2026-02-09 20:28:40,318 - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 20:28:40,318 - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8507138416)
+2026-02-09 20:28:51,648 - Connection established (tryings = 1, bot id = 8507138416)
+2026-02-09 20:35:57,675 - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 20:35:57,675 - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8507138416)
+2026-02-09 20:36:09,009 - Connection established (tryings = 1, bot id = 8507138416)
+2026-02-09 20:36:09,339 - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 20:36:09,340 - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8507138416)
+2026-02-09 20:36:21,073 - Connection established (tryings = 1, bot id = 8507138416)
+2026-02-09 20:37:03,086 - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [WinError 64] Указанное сетевое имя более недоступно
+2026-02-09 20:37:03,086 - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8507138416)
+2026-02-09 20:37:14,401 - Connection established (tryings = 1, bot id = 8507138416)
+2026-02-09 20:44:53,101 - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 20:44:53,101 - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8507138416)
+2026-02-09 20:45:04,801 - Connection established (tryings = 1, bot id = 8507138416)
+2026-02-09 20:48:11,784 - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 20:48:11,784 - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8507138416)
+2026-02-09 20:48:23,698 - Connection established (tryings = 1, bot id = 8507138416)
+2026-02-09 20:49:05,503 - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2026-02-09 20:49:05,503 - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8507138416)
+2026-02-09 20:49:17,599 - Connection established (tryings = 1, bot id = 8507138416)
