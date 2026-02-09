@@ -113,8 +113,8 @@ async def start(message: types.Message, state: FSMContext):
         if role == 'admin' or role == 'manager' or role == 'brigadir':
             board.add(types.InlineKeyboardButton(text="Задания", callback_data="task"))
         board.adjust(1)
-
-        sent_message = await message.answer (f"<i>Привет, {name}!!!</i>", parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
+        text = check_personal(region)
+        sent_message = await message.answer (f"<i>Привет, {name}!!!\nАктивные работники на площадке:</i>\n{text}", parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
         asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
     else:
         sent_message = await message.answer (f"Вы не зарегистрированы", parse_mode="HTML")
@@ -142,8 +142,9 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             if role == 'admin' or role == 'manager' or role == 'brigadir':
                 board.add(types.InlineKeyboardButton(text="Задания", callback_data="task"))
             board.adjust(1)
+            text = check_personal(region)
             try:
-                sent_message = await callback_query.message.edit_text (f"<i>Привет, {name}!!!</i>", parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
+                sent_message = await callback_query.message.edit_text (f"<i>Привет, {name}!!!\nАктивные работники на площадке:</i>\n{text}", parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
                 asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
             except Exception as e:
                 # Если не получается отредактировать (например, сообщение с фото),
@@ -151,7 +152,7 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
                 await callback_query.message.delete()
                 sent_message = await bot.send_message(
                     callback_query.from_user.id,
-                    f"<i>Привет, {name}!!!</i>",
+                    f"<i>Привет, {name}!!!\nАктивные работники на площадке:</i>\n{text}",
                     parse_mode="HTML",
                     disable_web_page_preview=True,
                     reply_markup=board.as_markup()
@@ -1641,7 +1642,7 @@ def reg_log(region, user, text):
         con.commit()
 
 # Удаление сообщения после задержки
-async def delete_message_after_delay(chat_id: int, message_id: int, delay: int = 300):
+async def delete_message_after_delay(chat_id: int, message_id: int, delay: int = 600):
     await asyncio.sleep(delay)  # Задержка в секундах
     try:
         await bot.delete_message(chat_id, message_id)
@@ -1667,6 +1668,21 @@ def update_data_role_DB(user_id, name):
         cur.execute(f'UPDATE users SET us_name = ? WHERE us_idtg = {user_id} ', [name])
         con.commit()
 
+def check_personal(region):
+    with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
+        cur = con.cursor()
+        result_position = cur.execute('SELECT position FROM Position WHERE status = ?', ['активна']).fetchall()
+        logging.info(f"{result_position}")   
+        text = ""
+        for position_tuple in result_position:
+            position = position_tuple[0]
+            result_employees = cur.execute(f'SELECT id FROM employees WHERE position = ?', [position]).fetchall()
+            data = len(result_employees)
+            text += f'<i><u>{position}</u> - {data}</i>\n'
+            logging.info(f"{text}")   
+    return text
+
+
 # Воркер для шедулера
 async def schedule_worker():
     loop = asyncio.get_event_loop()
@@ -1676,6 +1692,7 @@ async def schedule_worker():
 #    schedule.every(30).minutes.do(lambda: asyncio.create_task(check_tasks()))
     # Запускаем шедулер в отдельном потоке
     await loop.run_in_executor(None, run_schedule)
+
 def run_schedule():
     """Запуск планировщика в отдельном потоке"""
     while True:
