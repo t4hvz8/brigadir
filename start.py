@@ -10,6 +10,8 @@ import asyncio
 import schedule
 import time
 
+import pandas as pd
+
 from config import *
 
 from datetime import datetime
@@ -114,7 +116,7 @@ async def start(message: types.Message, state: FSMContext):
             board.add(types.InlineKeyboardButton(text="Задания", callback_data="task"))
         board.adjust(1)
         text = check_personal(region)
-        sent_message = await message.answer (f"<i>Привет, {name}!!!\nАктивные работники на площадке:</i>\n{text}", parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
+        sent_message = await message.answer (f"<i>Привет, {name}!!!\nАктивные работники на площадке {region}:</i>\n{text}", parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
         asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
     else:
         sent_message = await message.answer (f"Вы не зарегистрированы", parse_mode="HTML")
@@ -144,7 +146,7 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             board.adjust(1)
             text = check_personal(region)
             try:
-                sent_message = await callback_query.message.edit_text (f"<i>Привет, {name}!!!\nАктивные работники на площадке:</i>\n{text}", parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
+                sent_message = await callback_query.message.edit_text (f"<i>Привет, {name}!!!\nАктивные работники на площадке {region}:</i>\n{text}", parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
                 asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
             except Exception as e:
                 # Если не получается отредактировать (например, сообщение с фото),
@@ -217,6 +219,16 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             sent_message = await callback_query.message.edit_text ('Выбери нужный пункт', parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
             asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
         
+        elif data == "personal_export":
+            await callback_query.answer()
+            await state.clear()
+            board = InlineKeyboardBuilder()
+            board.row(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
+            document = FSInputFile(export_to_excel_without_blob(region))
+            sent_message = await bot.send_document(chat_id=user_id, document=document, caption="Файл в формате Excel", parse_mode="HTML", reply_markup=board.as_markup())
+            asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
+
+
         elif data == "position_add":
             await callback_query.answer()
             await state.clear()
@@ -279,9 +291,9 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             emp_id = callback_query.data.split("_", 1)[1]
             with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
                 cur = con.cursor()
-                result = cur.execute('SELECT id, full_name, tg_link, position, locker_number, birthday, phone_main, phone_backup, hire_date, dogovor, notes, photo, siz_dress, siz_shoes, who_add, status FROM employees WHERE id = ?', [emp_id]).fetchone()
+                result = cur.execute('SELECT id, full_name, tg_link, position, locker_number, birthday, phone_main, phone_backup, hire_date, dogovor, notes, photo, siz_dress, siz_shoes, status FROM employees WHERE id = ?', [emp_id]).fetchone()
                 if result:
-                    emp_id, full_name, tg_link, position, locker_number, birthday, phone_main, phone_backup, hire_date, dogovor, notes, photo, siz_dress, siz_shoes, who_add, status = result
+                    emp_id, full_name, tg_link, position, locker_number, birthday, phone_main, phone_backup, hire_date, dogovor, notes, photo, siz_dress, siz_shoes, status = result
             birthday_formatted = format_date(birthday)
             hire_date_formatted = format_date(hire_date)
             text = f"<b>ФИО:</b><i> {full_name}</i>\n"
@@ -295,7 +307,6 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             text += f"<b>Телеграмм:</b><i> {tg_link}</i>\n"
             text += f"<b>Размер одежды:</b><i> {siz_dress}</i>\n"
             text += f"<b>Размер обуви:</b><i> {siz_shoes}</i>\n"
-            text += f"<b>Добавил:</b><i> {who_add}</i>\n"
             text += f"<b>Заметки:</b><i> {notes}</i>\n"
             if photo:
                 try:
@@ -831,7 +842,8 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
                             time_end VARCHAR (100), 
                             task VARCHAR (100), 
                             status VARCHAR (100),
-                            finish BLOB
+                            finish BLOB,
+                            finish_text VARCHAR (100)
                             )''')
                 con.commit()
             board = InlineKeyboardBuilder()
@@ -982,12 +994,66 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id)) 
 
         elif data == "megivetask":
+            await callback_query.answer()
+            await state.clear()
+            user_id = callback_query.from_user.id
+            
+            with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
+                cur = con.cursor()
+                rows = cur.execute(f'SELECT * FROM tasks WHERE who_add = {user_id}').fetchall()
+            if rows:
+                text = "<b>Список инициированных тобой задач:</b>\n"
+                for row in rows:
+                    text += (f'<u>Задача номер {row[0]} для <b>{row[4]}</b></u>\n'
+                            f'<i>Статус - {row[8]}</i>\n'
+                            f'{row[7]}\n')
+                    if row[10]:
+                        text += f'❗️<b>Результат: {row[10]}</b>\n\n'
+                    else:
+                        text += '\n'
+            else:
+                text = "<b>Список инициированных задач пуст</b>\n"
+            board = InlineKeyboardBuilder()
+            board.add(types.InlineKeyboardButton(text="Удалить", callback_data="task_erase")) 
+            board.add(types.InlineKeyboardButton(text="Создать", callback_data="addtask"))
+            board.row(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))    
+            sent_message = await callback_query.message.edit_text (f'{text}', parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())          
+            asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id)) 
+
+        elif data == "task_erase":
             await callback_query.answer(text='🙅‍♂️ Еще не реализовано', show_alert=True, cache_time=5)  # Время кэширования ответа в секундах  # False - тост внизу, True - модальное окно
-
-
+        
     else:
         sent_message = await callback_query.message.edit_text (f"Вы не зарегистрированы", parse_mode="HTML")
         asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
+
+# Экспорт сотрудников в эксель
+def export_to_excel_without_blob(region):
+    db_path = f'data/db/work db/warehouse_{region}.db'
+    
+    # Подключаемся к базе данных
+    with sqlite3.connect(db_path) as con:
+        # Создаем SQL запрос без поля photo
+        query = '''
+            SELECT 
+                id, full_name, fio, tg_link, position, 
+                locker_number, birthday, phone_main, phone_backup, 
+                hire_date, dogovor, notes, status, siz_dress, 
+                siz_shoes, who_add
+            FROM employees
+        '''
+        
+        # Читаем данные в pandas DataFrame
+        df = pd.read_sql_query(query, con)
+        
+        # Экспортируем в Excel
+        now = datetime.now()
+        now = now.strftime('%d-%m-%Y')
+        excel_path = f'сотрудники_{region}_{now}.xlsx'
+        df.to_excel(excel_path, index=False)
+        
+    return excel_path
+
 
 
 # Календарь
@@ -1046,47 +1112,124 @@ async def add_task(message: Message, state: FSMContext):
         sent_message = await bot.edit_message_text(chat_id=user_id, message_id=msg_id, text="<i>Пожалуйста, только текст</i>", parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())           
         asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
 
+# Отчет о выполненном задании
 @dp.message(worktask.finish_task)
 async def finish_task(message: Message, state: FSMContext):
     user_id = message.from_user.id
+    user_data = await state.get_data()
+    region = user_data['region']
+    msg_id = user_data['msg_id']
+    task = user_data['task']
+    to_whom_name = user_data['to_whom_name']
+    who_add = user_data['who_add']
+    task_id = user_data['task_id']
+    
+    # Создаем папку для сохранения файлов, если ее нет
+#    os.makedirs(f'data/tasks/{task_id}', exist_ok=True)
+    
     if is_image_message(message):
-        user_data = await state.get_data()
-        region = user_data['region']
-        msg_id = user_data['msg_id']
-        task = user_data['task']
-        to_whom_name = user_data['to_whom_name']
-        who_add = user_data['who_add']
-        task_id = user_data['task_id']
+        # Пользователь прислал фото
+        if message.caption:
+            # Есть описание к фото - сохраняем описание в .txt
+            description = message.caption
+            with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
+                cur = con.cursor()
+                cur.execute(f'UPDATE tasks SET finish_text = ? WHERE id = {task_id}', [description])
+                con.commit()
+        # Сохраняем фото
         photo = message.photo[-1]  # Берем фото с самым высоким разрешением
         file_id = photo.file_id
         file = await bot.get_file(file_id)
         file_path = file.file_path
         download_path = os.path.join('data/temp', f"image_{user_id}.jpg")
         await bot.download_file(file_path, destination=download_path)
-        scr = FSInputFile(f"data/temp/image_{user_id}.jpg")
+        save_finish_photo(user_id, region, task_id)
+        
+        
+        # Отправляем уведомление инициатору
         text = (f'Задание для {to_whom_name}:\n'
                 f'{task}\n'
                 'Выполнено. Прошу принять по фотоотчету')
-        save_finish_photo(user_id, region, task_id)
+        
+        if message.caption:
+            text += f"\n\nОписание от исполнителя:\n{message.caption}"
+        
         try:
             board1 = InlineKeyboardBuilder()
             board1.add(types.InlineKeyboardButton(text="Принять", callback_data=f"task_end:{task_id}:{user_id}"))
             board1.add(types.InlineKeyboardButton(text="Отклонить", callback_data=f"task_not:{task_id}:{user_id}"))
-            send_photo = await bot.send_photo(chat_id=who_add, photo=scr, caption=text, parse_mode="HTML", reply_markup=board1.as_markup())
-            text = "Уведомление о выполнении задания доставлено"
+            
+            scr = FSInputFile(f"data/temp/image_{user_id}.jpg")
+            send_photo = await bot.send_photo(
+                chat_id=who_add, 
+                photo=scr, 
+                caption=text, 
+                parse_mode="HTML", 
+                reply_markup=board1.as_markup()
+            )
+            text_response = "Уведомление о выполнении задания доставлено"
         except Exception as e:
-            text = f"Уведомление о выполнении задания не доставлено.\nОшибка {e}"
-        await message.delete()
-        board = InlineKeyboardBuilder()
-        board.add(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
-        sent_message = await bot.edit_message_text(chat_id=user_id, message_id=msg_id, text="Задание будет завершено после принятия инициатором", parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())           
-        asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
+            text_response = f"Уведомление о выполнении задания не доставлено.\nОшибка {e}"
+        
+    elif message.text:
+        # Пользователь прислал только текст - сохраняем в .txt файл
+        description = message.text
+        with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
+            cur = con.cursor()
+            cur.execute(f'UPDATE tasks SET finish_text = ? WHERE id = {task_id}', [description])
+            con.commit()
+        
+        # Отправляем уведомление инициатору
+        text = (f'Задание для {to_whom_name}:\n'
+                f'{task}\n'
+                'Выполнено. Текстовый отчет.')
+        
+        text += f"\n\nОтчет от исполнителя:\n{description}"
+        
+        try:
+            board1 = InlineKeyboardBuilder()
+            board1.add(types.InlineKeyboardButton(text="Принять", callback_data=f"task_end:{task_id}:{user_id}"))
+            board1.add(types.InlineKeyboardButton(text="Отклонить", callback_data=f"task_not:{task_id}:{user_id}"))
+            
+            await bot.send_message(
+                chat_id=who_add,
+                text=text,
+                parse_mode="HTML",
+                reply_markup=board1.as_markup()
+            )
+            text_response = "Уведомление о выполнении задания доставлено"
+        except Exception as e:
+            text_response = f"Уведомление о выполнении задания не доставлено.\nОшибка {e}"
+    
     else:
+        # Пользователь прислал что-то другое
         await message.delete()
         board = InlineKeyboardBuilder()
         board.add(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
-        sent_message = await bot.edit_message_text(chat_id=user_id, message_id=msg_id, text="<i>Прошу, фотоотчет</i>", parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())           
+        sent_message = await bot.edit_message_text(
+            chat_id=user_id, 
+            message_id=msg_id, 
+            text="<i>Пожалуйста, отправьте фотоотчет или текстовое описание выполнения задания</i>", 
+            parse_mode="HTML", 
+            disable_web_page_preview=True, 
+            reply_markup=board.as_markup()
+        )           
         asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
+        return
+    
+    # Удаляем сообщение пользователя и отправляем ответ
+    await message.delete()
+    board = InlineKeyboardBuilder()
+    board.add(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
+    sent_message = await bot.edit_message_text(
+        chat_id=user_id, 
+        message_id=msg_id, 
+        text=text_response, 
+        parse_mode="HTML", 
+        disable_web_page_preview=True, 
+        reply_markup=board.as_markup()
+    )           
+    asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
 
 # Ввод номера шкафчика
 @dp.message(employees.locker_number)
@@ -1497,9 +1640,10 @@ def save_finish_photo(user_id, region, task_id):
     image_path = f'data/temp/image_{user_id}.jpg'
     with open(image_path, 'rb') as file:
         task_finish = file.read()
+    text = "Завершена исполнителем"
     with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
         cur = con.cursor()
-        cur.execute(f'UPDATE tasks SET finish = ? WHERE id = {task_id}', [task_finish])
+        cur.execute(f'UPDATE tasks SET finish = ?, finish_text = ? WHERE id = {task_id}', [task_finish, text])
         con.commit()
 
 
@@ -1672,26 +1816,62 @@ def check_personal(region):
     with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
         cur = con.cursor()
         result_position = cur.execute('SELECT position FROM Position WHERE status = ?', ['активна']).fetchall()
-        logging.info(f"{result_position}")   
         text = ""
         for position_tuple in result_position:
             position = position_tuple[0]
             result_employees = cur.execute(f'SELECT id FROM employees WHERE position = ? AND status = "active"', [position]).fetchall()
             data = len(result_employees)
             text += f'<i><u>{position}</u> - {data}</i>\n'
-            logging.info(f"{text}")   
     return text
 
+async def send_daily_report():
+    with sqlite3.connect('data/db/role.db') as con:
+        cur = con.cursor()
+        result_regions = cur.execute('SELECT name FROM regions').fetchall()
+    
+    for region_tuple in result_regions:    
+        region = region_tuple[0]
+        with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
+            cur = con.cursor()
+            chatID = (cur.execute(f'SELECT chat_id FROM DATA WHERE status = "active"').fetchone())[0]
+            result_task = cur.execute(f'SELECT * FROM tasks WHERE status = "active"').fetchall()
+            
+            if result_task:  # Проверяем, есть ли задачи
+                text = "Отчет по активным заданиям:\nНа текущий момент активны следующие задания:\n\n"
+                for row in result_task:
+                    text += f"<b>Задание №{row[0]} для {row[4]}</b>\n{row[7]}\n\n"
+                
+                if text:  # Проверяем, что текст не пустой
+                    try:
+                        await bot.send_message(
+                            chat_id=chatID, 
+                            text=text, 
+                            parse_mode="HTML", 
+                            disable_web_page_preview=True
+                        )
+                    except Exception as e:
+                        logging.error(f"Ошибка отправки сообщения в регионе {region}: {e}")
 
 # Воркер для шедулера
 async def schedule_worker():
-    loop = asyncio.get_event_loop()
-    # Запланированные задачи
-#    schedule.every().day.at("08:00").do(lambda: asyncio.create_task(send_daily_report()))
-#    schedule.every().hour.at(":00").do(lambda: asyncio.create_task(send_reminder()))
-#    schedule.every(30).minutes.do(lambda: asyncio.create_task(check_tasks()))
-    # Запускаем шедулер в отдельном потоке
-    await loop.run_in_executor(None, run_schedule)
+    """Асинхронный планировщик"""
+    while True:
+        # Получаем текущее время
+        now = datetime.now()
+        current_time = now.strftime("%H:%M")
+        logging.info(f"Текущее время: {current_time}")
+        # Проверяем, нужно ли выполнить задачу
+        if current_time == "08:00":  # Замените на нужное время
+            try:
+                await send_daily_report()
+            except Exception as e:
+                logging.error(f"Ошибка выполнения daily report: {e}")
+            
+            # Ждем минуту, чтобы не выполнять задачу несколько раз в течение минуты
+            await asyncio.sleep(60)
+        
+        # Ждем 10 секунд перед следующей проверкой
+        await asyncio.sleep(50)
 
 def run_schedule():
     """Запуск планировщика в отдельном потоке"""
@@ -1703,8 +1883,22 @@ def run_schedule():
 
 # Запуск бота
 async def main():
-#    asyncio.create_task(schedule_worker())
-    await dp.start_polling(bot)
+    # Создаем задачу для планировщика
+    scheduler_task = asyncio.create_task(schedule_worker())  # или schedule_worker_v2()
+    
+    try:
+        # Запускаем бота
+        logging.info("Бот запущен")
+        await dp.start_polling(bot, skip_updates=True)
+    except Exception as e:
+        logging.error(f"Ошибка при запуске бота: {e}")
+    finally:
+        # Отменяем задачу планировщика при завершении
+        scheduler_task.cancel()
+        try:
+            await scheduler_task
+        except asyncio.CancelledError:
+            logging.info("Планировщик остановлен")
 
 if __name__ == "__main__":
     import asyncio
