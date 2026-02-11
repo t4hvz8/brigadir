@@ -10,6 +10,8 @@ import asyncio
 import schedule
 import time
 
+from typing import Optional
+
 import pandas as pd
 
 from config import *
@@ -93,7 +95,8 @@ class worktask(StatesGroup):
     addtask = State()
     finish_task = State()
     
-    
+class tabel_add(StatesGroup):
+    tabelday = State()    
 
 
 # Обработчик команды /start
@@ -163,7 +166,8 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
 
         elif data == "role":
             await callback_query.answer()
-            await state.clear()
+            if state:
+                await state.clear()
             board = InlineKeyboardBuilder()
             board.add(types.InlineKeyboardButton(text="Ясно", callback_data="OK"))
             sent_message = await callback_query.message.edit_text (f'Ваша роль - {role} из {region}', parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
@@ -171,7 +175,8 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
 
         elif data == "personal":
             await callback_query.answer()
-            await state.clear()
+            if state:
+                await state.clear()
             with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
                 cur = con.cursor()
                 cur.execute('''
@@ -208,30 +213,119 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
                             )''')
                 con.commit()
             board = InlineKeyboardBuilder()
-            board.add(types.InlineKeyboardButton(text="Активные", callback_data="personal_active"))
+            board.row(types.InlineKeyboardButton(text="Активные", callback_data="personal_active"))
             board.add(types.InlineKeyboardButton(text="Уволенные", callback_data="personal_inactive"))
-            board.add(types.InlineKeyboardButton(text="Добавить сотрудника", callback_data="personal_add"))
+            board.row(types.InlineKeyboardButton(text="Добавить сотрудника", callback_data="personal_add"))
             if role == 'admin' or role == 'manager':
-                board.add(types.InlineKeyboardButton(text="Список должностей", callback_data="position_add"))
-            board.add(types.InlineKeyboardButton(text="Экспорт в excel", callback_data="personal_export"))
-            board.add(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
-            board.adjust(2, 1, 1, 1)
+                board.row(types.InlineKeyboardButton(text="Список должностей", callback_data="position_add"))
+            board.row(types.InlineKeyboardButton(text="Табелирование", callback_data="personalTABEL"))    
+            board.row(types.InlineKeyboardButton(text="Экспорт в excel", callback_data="personal_export"))
+            board.row(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
             sent_message = await callback_query.message.edit_text ('Выбери нужный пункт', parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
             asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
         
+        elif data == "personalTABEL":
+            await callback_query.answer()
+            if state:
+                await state.clear()
+            
+            sql_columns = []
+            for day in range(1, 32):
+                sql_columns.append(f"day_{day}")
+            current_month_year = datetime.now().strftime('%B_%Y').lower()
+            create_table_sql = f"""
+            CREATE TABLE IF NOT EXISTS TABEL_{current_month_year} (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                full_name VARCHAR (100),
+                position VARCHAR (100),
+                {', '.join(sql_columns)},
+                itogo VARCHAR (100),
+                day VARCHAR (100),
+                night VARCHAR (100),
+                vsego_smen VARCHAR (100)
+            )
+            """
+
+            with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
+                cur = con.cursor()
+                cur.execute(create_table_sql)
+                con.commit()
+                result_position = cur.execute('SELECT full_name, position FROM employees WHERE status = ?', ['active']).fetchall()
+                text = ""
+                for result in result_position:
+                    cur.execute(f'INSERT INTO TABEL_{current_month_year} (full_name, position) VALUES (?, ?)', (result[0], result[1]))
+                con.commit()
+
+            text = f"Месяц {datetime.now().strftime('%B')}"
+            board = InlineKeyboardBuilder()
+            board.row(types.InlineKeyboardButton(text="☀️День", callback_data="smena_day"))
+            board.add(types.InlineKeyboardButton(text="Ночь🌑", callback_data="smena_night"))
+            board.row(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
+            sent_message = await callback_query.message.edit_text (f'{text}\nВыбирай', parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
+            asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
+
+        elif data == "smena_day":
+            await callback_query.answer()
+            if state:
+                await state.clear()
+            await state.set_state(tabel_add.tabelday)
+            await state.update_data(smena='дневную')
+            text = "Добавляем дневные смены, выбирай дату"
+            days = tabel_days()
+            board = InlineKeyboardBuilder()
+            for day in days:
+                board.row(types.InlineKeyboardButton(text=f"{day}", callback_data=f"ddday_{day}"))
+            board.adjust(*[8] * len(days), 1)
+            board.row(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
+            sent_message = await callback_query.message.edit_text (f'{text}', parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
+            asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
+
+        elif callback_query.data.startswith("ddday_"):
+            await callback_query.answer()
+            day = callback_query.data.split("_")[1]
+            await state.update_data(tabelday=callback_query.data, region=region, user_id=user_id)
+            status = 'active'
+            tabel = 'TABEL'
+            await add_smena(callback_query, state, 1, region, status, tabel)
+
+            
+            
+            
+            
+           
+
+        elif callback_query.data.startswith("TABEL:employee_"):
+            await callback_query.answer()
+            emp_id = callback_query.data.split("_", 1)[1]      
+            await state.update_data(emp_id=emp_id)
+            user_data = await state.get_data()
+            smena = user_data['smena']
+            text = f'Добавляем {smena} сотрудникам:\n'
+            with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
+                cur = con.cursor()
+                result = (cur.execute('SELECT fio FROM employees WHERE id = ?', [emp_id]).fetchone())[0]
+            text += f'{result}\n'
+
+
+        
+
+
+
+
         elif data == "personal_export":
             await callback_query.answer()
-            await state.clear()
+            if state:
+                await state.clear()
             board = InlineKeyboardBuilder()
             board.row(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
             document = FSInputFile(export_to_excel_without_blob(region))
             sent_message = await bot.send_document(chat_id=user_id, document=document, caption="Файл в формате Excel", parse_mode="HTML", reply_markup=board.as_markup())
             asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
 
-
         elif data == "position_add":
             await callback_query.answer()
-            await state.clear()
+            if state:
+                await state.clear()
             board = InlineKeyboardBuilder()
             if role == 'admin' or role == 'manager':
                 board.add(types.InlineKeyboardButton(text="Добавить должность", callback_data="position_new"))
@@ -1027,6 +1121,14 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
         sent_message = await callback_query.message.edit_text (f"Вы не зарегистрированы", parse_mode="HTML")
         asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
 
+# Добавление смены
+@dp.message(tabel_add.tabelday)
+async def add_smena(callback_query, state: FSMContext, page, region, status, tabel):    
+    user_data = await state.get_data()
+    smena = user_data['smena']
+    await show_employees_page(callback_query, page, region, status, tabel)
+    
+
 # Экспорт сотрудников в эксель
 def export_to_excel_without_blob(region):
     db_path = f'data/db/work db/warehouse_{region}.db'
@@ -1053,8 +1155,6 @@ def export_to_excel_without_blob(region):
         df.to_excel(excel_path, index=False)
         
     return excel_path
-
-
 
 # Календарь
 def my_calendar_year(delta, years_range):
@@ -1123,9 +1223,6 @@ async def finish_task(message: Message, state: FSMContext):
     to_whom_name = user_data['to_whom_name']
     who_add = user_data['who_add']
     task_id = user_data['task_id']
-    
-    # Создаем папку для сохранения файлов, если ее нет
-#    os.makedirs(f'data/tasks/{task_id}', exist_ok=True)
     
     if is_image_message(message):
         # Пользователь прислал фото
@@ -1635,6 +1732,13 @@ async def add_newpersonphoto(message: Message, state: FSMContext):
         sent_message = await bot.edit_message_text(chat_id=user_id, message_id=msg_id, text="<i>Вводи корректные новые данные</i>", parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())           
         asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
 
+# генерация массива 1-31
+def tabel_days():
+    days = []
+    for i in range (1, 32):
+        days.append(i)
+    return days
+
 # Сохранение результата задачи в базу
 def save_finish_photo(user_id, region, task_id):
     image_path = f'data/temp/image_{user_id}.jpg'
@@ -1645,8 +1749,6 @@ def save_finish_photo(user_id, region, task_id):
         cur = con.cursor()
         cur.execute(f'UPDATE tasks SET finish = ?, finish_text = ? WHERE id = {task_id}', [task_finish, text])
         con.commit()
-
-
 
 def who_did(user_id):
     with sqlite3.connect(f'data/db/role.db') as con:
@@ -1674,7 +1776,7 @@ def get_employees_page(page: int, region: str, status) -> Tuple[List[Tuple], int
         cur = con.cursor()
         # Получаем сотрудников с статусом 'active' в алфавитном порядке
         employees = cur.execute('''
-            SELECT id, fio, position 
+            SELECT id, fio 
             FROM employees 
             WHERE status = ? 
             ORDER BY full_name 
@@ -1699,16 +1801,22 @@ def format_employees_message(employees: List[Tuple], page: int, total_pages: int
     return message_text
 
 # Функция для создания клавиатуры пагинации
-def create_pagination_keyboard(page: int, total_pages: int, employees: List[Tuple], status) -> types.InlineKeyboardMarkup:
+def create_pagination_keyboard(page: int, total_pages: int, employees: List[Tuple], status, tabel) -> types.InlineKeyboardMarkup:
     """Создание клавиатуры с сотрудниками и пагинацией"""
     keyboard = InlineKeyboardBuilder()
     
     # Добавляем кнопки сотрудников
-    for emp_id, fio, position in employees:
-        keyboard.add(types.InlineKeyboardButton(
-            text=f"{fio}",
-            callback_data=f"employee_{emp_id}"
-        ))
+    for emp_id, fio in employees:
+        if tabel:
+            keyboard.add(types.InlineKeyboardButton(
+                text=f"{fio}",
+                callback_data=f"{tabel}:employee_{emp_id}"
+            ))
+        else:
+            keyboard.add(types.InlineKeyboardButton(
+                text=f"{fio}",
+                callback_data=f"employee_{emp_id}"
+            ))
     
     keyboard.adjust(2)  # По одной кнопке в строке
     
@@ -1740,7 +1848,7 @@ def create_pagination_keyboard(page: int, total_pages: int, employees: List[Tupl
     return keyboard.as_markup()
 
 # Функция для отображения страницы сотрудников
-async def show_employees_page(callback_query: types.CallbackQuery, page: int, region: str, status):
+async def show_employees_page(callback_query: types.CallbackQuery, page: int, region: str, status, tabel = None):
     """Отображение страницы с сотрудниками"""
     employees, total_count = get_employees_page(page, region, status)
     total_pages = (total_count + ITEMS_PER_PAGE - 1) // ITEMS_PER_PAGE
@@ -1750,7 +1858,7 @@ async def show_employees_page(callback_query: types.CallbackQuery, page: int, re
         employees, total_count = get_employees_page(page, region, status)
     
     message_text = format_employees_message(employees, page, total_pages, total_count)
-    keyboard = create_pagination_keyboard(page, total_pages, employees, status)
+    keyboard = create_pagination_keyboard(page, total_pages, employees, status, tabel)
     
     await callback_query.message.edit_text(
         text=message_text,
@@ -1786,10 +1894,12 @@ def reg_log(region, user, text):
         con.commit()
 
 # Удаление сообщения после задержки
-async def delete_message_after_delay(chat_id: int, message_id: int, delay: int = 600):
+async def delete_message_after_delay(chat_id: int, message_id: int, delay: int = 600, state: Optional[FSMContext] = None):
     await asyncio.sleep(delay)  # Задержка в секундах
     try:
         await bot.delete_message(chat_id, message_id)
+        if state:
+            await state.clear()
     except Exception as e:
         logging.error(f"Не удалось удалить сообщение {chat_id}: {e}")
 
