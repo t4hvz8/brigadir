@@ -113,6 +113,7 @@ async def start(message: types.Message, state: FSMContext):
         board = InlineKeyboardBuilder()
         if role == 'admin' or role == 'manager' or role == 'brigadir':
             board.add(types.InlineKeyboardButton(text="Персонал", callback_data="personal"))
+            board.add(types.InlineKeyboardButton(text="Табелирование", callback_data="personalTABEL"))    
         if role == 'admin' or role == 'manager' or role == 'brigadir':
             board.add(types.InlineKeyboardButton(text="Склад", callback_data="warehouse"))
         if role == 'admin' or role == 'manager' or role == 'brigadir':
@@ -142,6 +143,7 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             board = InlineKeyboardBuilder()
             if role == 'admin':
                 board.add(types.InlineKeyboardButton(text="Персонал", callback_data="personal"))
+                board.add(types.InlineKeyboardButton(text="Табелирование", callback_data="personalTABEL")) 
             if role == 'admin' or role == 'manager':
                 board.add(types.InlineKeyboardButton(text="Склад", callback_data="warehouse"))
             if role == 'admin' or role == 'manager' or role == 'brigadir':
@@ -218,7 +220,7 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             board.row(types.InlineKeyboardButton(text="Добавить сотрудника", callback_data="personal_add"))
             if role == 'admin' or role == 'manager':
                 board.row(types.InlineKeyboardButton(text="Список должностей", callback_data="position_add"))
-            board.row(types.InlineKeyboardButton(text="Табелирование", callback_data="personalTABEL"))    
+#            board.row(types.InlineKeyboardButton(text="Табелирование", callback_data="personalTABEL"))    
             board.row(types.InlineKeyboardButton(text="Экспорт в excel", callback_data="personal_export"))
             board.row(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
             sent_message = await callback_query.message.edit_text ('Выбери нужный пункт', parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
@@ -228,7 +230,6 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             await callback_query.answer()
             if state:
                 await state.clear()
-            
             sql_columns = []
             for day in range(1, 32):
                 sql_columns.append(f"day_{day}")
@@ -248,20 +249,27 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
 
             with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
                 cur = con.cursor()
-                cur.execute(create_table_sql)
-                con.commit()
-                result_position = cur.execute('SELECT full_name, position FROM employees WHERE status = ?', ['active']).fetchall()
-                text = ""
-                for result in result_position:
-                    cur.execute(f'INSERT INTO TABEL_{current_month_year} (full_name, position) VALUES (?, ?)', (result[0], result[1]))
-                con.commit()
+                cur.execute(f"""
+                    SELECT name 
+                    FROM sqlite_master 
+                    WHERE type='table' AND name='TABEL_{current_month_year}'
+                """)
+                table_exists = cur.fetchone()
+                if not table_exists:
+                    cur.execute(create_table_sql)
+                    con.commit()
+                    result_position = cur.execute('SELECT full_name, position FROM employees WHERE status = ?', ['active']).fetchall()
+                    text = ""
+                    for result in result_position:
+                        cur.execute(f'INSERT INTO TABEL_{current_month_year} (full_name, position) VALUES (?, ?)', (result[0], result[1]))
+                    con.commit()
 
             text = f"Месяц {datetime.now().strftime('%B')}"
             board = InlineKeyboardBuilder()
             board.row(types.InlineKeyboardButton(text="☀️День", callback_data="smena_day"))
             board.add(types.InlineKeyboardButton(text="Ночь🌑", callback_data="smena_night"))
             board.row(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
-            sent_message = await callback_query.message.edit_text (f'{text}\nВыбирай', parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
+            sent_message = await callback_query.message.edit_text (f'{text}. Какую смену проставляем?', parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
             asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
 
         elif data == "smena_day":
@@ -283,42 +291,74 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
         elif callback_query.data.startswith("ddday_"):
             await callback_query.answer()
             day = callback_query.data.split("_")[1]
+            await state.update_data(day=day)
             user_data = await state.get_data()
             smena = user_data['smena']
             status = 'active'
             tabel = 'TABEL'
             employees_list = []
-            await add_smena(callback_query, state, 1, region, status, tabel, employees_list, smena)
 
-            
-            
-            
-            
- 
+            await state.update_data(employees_list=employees_list)
+            await add_smena(callback_query, state, 1, region, status, tabel, employees_list, smena)
 
         elif callback_query.data.startswith("TABEL:employee_"):
             await callback_query.answer()
-            emp_id = callback_query.data.split("_")[1]   
-            employees_list = callback_query.data.split("_")[2]   
-            smena = callback_query.data.split("_")[3]   
+            emp_id = callback_query.data.split("_")[1]
+            smena = callback_query.data.split("_")[3]
+            page = int(callback_query.data.split("_")[4])
+            user_data = await state.get_data()
+            employees_list = user_data['employees_list']
             with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
                 cur = con.cursor()
                 result = (cur.execute('SELECT id FROM employees WHERE id = ?', [emp_id]).fetchone())[0]
-            logging.info(f'{employees_list}, {result}')
             if employees_list:
                 employees_list.append(result)
+                await state.update_data(employees_list=employees_list)
             else:
                 employees_list = [result]
-            await show_employees_page(callback_query, page, region, status, tabel, employees_list)
-
+                await state.update_data(employees_list=employees_list)
+            status = 'active'
+            tabel = 'TABEL'
+            user_data = await state.get_data()
+            employees_list = user_data['employees_list']
+            await show_employees_page(callback_query, page, region, status, tabel, employees_list, smena)
+            
         elif callback_query.data.startswith("TABEL:write_"):
-            await callback_query.answer(text='🙅‍♂️ Еще не реализовано', show_alert=True, cache_time=5)  # Время кэширования ответа в секундах  # False - тост внизу, True - модальное окно
+            await callback_query.answer()
+            smena = callback_query.data.split("_")[1]
+            logging.info(f'{smena}')
+            user_data = await state.get_data()
+            employees_list = user_data['employees_list']
+            day = user_data['day']
+            current_month_year = datetime.now().strftime('%B_%Y').lower()
+            tabel_time = "ошибка"
+            if smena == 'дневную':
+                tabel_time = '11_0'
+            else:
+                tabel_time = '4_7'
+
+            placeholders = ','.join(['?'] * len(employees_list))
+            query = f'''
+                UPDATE TABEL_{current_month_year} 
+                SET day_{day} = ? 
+                WHERE id IN ({placeholders})
+            '''
+            
+            with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
+                cur = con.cursor()
+                cur.execute(query, (tabel_time, *employees_list))
+                con.commit()
 
         elif callback_query.data.startswith("TABEL:page_"):
             await callback_query.answer()
             page = int(callback_query.data.split("_")[1])
-            status = callback_query.data.split("_")[2]
-            await show_employees_page(callback_query, page, region, status)
+            smena = callback_query.data.split("_")[3]
+            status = 'active'
+            tabel = 'TABEL'
+            user_data = await state.get_data()
+            employees_list = user_data['employees_list']
+            await show_employees_page(callback_query, page, region, status, tabel, employees_list, smena)
+
 
 
         elif data == "personal_export":
@@ -1145,6 +1185,13 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
 
 
 
+# Запись employees_list
+def save_employees_list(region, user_id, employees_list):
+    with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
+        cur = con.cursor()
+        cur.execute(f'UPDATE variables SET employees_list = ? WHERE id = {user_id}', [employees_list])
+        con.commit
+
 
 
 # Добавление смены
@@ -1744,7 +1791,6 @@ async def add_newpersonphoto(message: Message, state: FSMContext):
         await message.delete()
         board = InlineKeyboardBuilder()
         board.add(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
-#        board.add(types.InlineKeyboardButton(text="Проверить", callback_data=f"employee_{emp_id}"))
         sent_message = await bot.edit_message_text(chat_id=user_id, message_id=msg_id, text=f"<b>{full_name} добавлен</b>", parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())          
         await state.update_data(msg_id=sent_message.message_id)
         asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
@@ -1796,6 +1842,7 @@ def is_pure_text_message(message: types.Message) -> bool:
 def get_employees_page(page: int, region: str, status) -> Tuple[List[Tuple], int]:
     """Получение страницы сотрудников и общего количества"""
     offset = (page - 1) * ITEMS_PER_PAGE
+    logging.info(f'{page}')
     with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
         cur = con.cursor()
         # Получаем сотрудников с статусом 'active' в алфавитном порядке
@@ -1819,6 +1866,7 @@ def get_employees_page(page: int, region: str, status) -> Tuple[List[Tuple], int
 # Функция для форматирования сообщения
 def format_employees_message(employees: List[Tuple], page: int, total_pages: int, total_count: int, region, employees_list, smena) -> str:
     """Форматирование сообщения со списком сотрудников"""
+
     if not employees:
         return "Нет активных сотрудников"
     message_text = ""
@@ -1827,7 +1875,7 @@ def format_employees_message(employees: List[Tuple], page: int, total_pages: int
             cur = con.cursor()
             message_text += f"Добавляем {smena} смену:\n"
             for employee in employees_list:
-                user_data = (cur.execute('SELECT fio FROM users WHERE idg = ?', [employee]).fetchone())[0]
+                user_data = (cur.execute('SELECT fio FROM employees WHERE id = ?', [employee]).fetchone())[0]
                 message_text += f"{user_data}\n"
         message_text += "\nВыбери нужного сотрудника"
     else:
@@ -1844,7 +1892,7 @@ def create_pagination_keyboard(page: int, total_pages: int, employees: List[Tupl
         if tabel:
             keyboard.add(types.InlineKeyboardButton(
                 text=f"{fio}",
-                callback_data=f"{tabel}:employee_{emp_id}_{employees_list}_{smena}"
+                callback_data=f"{tabel}:employee_{emp_id}_{employees_list}_{smena}_{page}"
             ))
         else:
             keyboard.add(types.InlineKeyboardButton(
@@ -1857,10 +1905,16 @@ def create_pagination_keyboard(page: int, total_pages: int, employees: List[Tupl
     # Добавляем кнопки пагинации
     nav_buttons = []
     if page > 1:
-        nav_buttons.append(types.InlineKeyboardButton(
-            text="◀️ Назад",
-            callback_data=f"page_{page-1}_{status}"
-        ))
+        if tabel:
+            nav_buttons.append(types.InlineKeyboardButton(
+                text="◀️ Назад",
+                callback_data=f"{tabel}:page_{page-1}_{employees_list}_{smena}"
+            ))
+        else:
+            nav_buttons.append(types.InlineKeyboardButton(
+                text="◀️ Назад",
+                callback_data=f"page_{page-1}_{status}"
+            ))
     
     nav_buttons.append(types.InlineKeyboardButton(
         text=f"{page}/{total_pages}",
@@ -1868,13 +1922,21 @@ def create_pagination_keyboard(page: int, total_pages: int, employees: List[Tupl
     ))
     
     if page < total_pages:
-        nav_buttons.append(types.InlineKeyboardButton(
-            text="Вперед ▶️",
-            callback_data=f"page_{page+1}_{status}"
-        ))
+        if tabel:
+            nav_buttons.append(types.InlineKeyboardButton(
+                text="Вперед ▶️",
+                callback_data=f"{tabel}:page_{page+1}_{employees_list}_{smena}"
+            ))
+        else:
+            nav_buttons.append(types.InlineKeyboardButton(
+                text="Вперед ▶️",
+                callback_data=f"page_{page+1}_{status}"
+            ))
     
     if nav_buttons:
         keyboard.row(*nav_buttons)
+    if employees_list:
+        keyboard.row(types.InlineKeyboardButton(text="✍️Зафиксировать смены в табель", callback_data=f"TABEL:write_{smena}"))
     
     # Добавляем кнопку возврата
     keyboard.row(types.InlineKeyboardButton(text="↪️ Назад в меню персонала", callback_data="personal"))
@@ -1886,7 +1948,7 @@ async def show_employees_page(callback_query: types.CallbackQuery, page: int, re
     """Отображение страницы с сотрудниками"""
     employees, total_count = get_employees_page(page, region, status)
     total_pages = (total_count + ITEMS_PER_PAGE - 1) // ITEMS_PER_PAGE
-    
+
     if page > total_pages and total_pages > 0:
         page = total_pages
         employees, total_count = get_employees_page(page, region, status)
