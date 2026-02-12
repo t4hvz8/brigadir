@@ -9,7 +9,6 @@ import os
 import asyncio
 import schedule
 import time
-import json
 
 from typing import Optional
 
@@ -264,10 +263,6 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
                     for result in result_position:
                         cur.execute(f'INSERT INTO TABEL_{current_month_year} (full_name, position) VALUES (?, ?)', (result[0], result[1]))
                     con.commit()
-                log_exist = cur.execute('SELECT id FROM variables WHERE user_id = ?', [user_id]).fetchone()
-                if not log_exist:
-                    cur.execute('INSERT INTO variables (user_id) VALUES (?)', (user_id,))
-                    con.commit()
 
             text = f"Месяц {datetime.now().strftime('%B')}"
             board = InlineKeyboardBuilder()
@@ -299,32 +294,41 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             await state.update_data(day=day)
             user_data = await state.get_data()
             smena = user_data['smena']
+            logging.info(f'передаем смену {smena}')
             status = 'active'
             tabel = 'TABEL'
-            await add_smena(callback_query, state, 1, region, status, tabel, smena, user_id)
+            employees_list = []
+            await state.update_data(employees_list=employees_list)
+            await add_smena(callback_query, state, 1, region, status, tabel, employees_list, smena)
 
         elif callback_query.data.startswith("TABEL:employee_"):
             await callback_query.answer()
             emp_id = callback_query.data.split("_")[1]
-            smena = callback_query.data.split("_")[2]
-            page = int(callback_query.data.split("_")[3])
+            smena = callback_query.data.split("_")[3]
+            page = int(callback_query.data.split("_")[4])
             user_data = await state.get_data()
-            update_employees_list(region, user_id, emp_id)
-            
+            employees_list = user_data['employees_list']
+            with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
+                cur = con.cursor()
+                result = (cur.execute('SELECT id FROM employees WHERE id = ?', [emp_id]).fetchone())[0]
+            if employees_list:
+                employees_list.append(result)
+                await state.update_data(employees_list=employees_list)
+            else:
+                employees_list = [result]
+                await state.update_data(employees_list=employees_list)
             status = 'active'
             tabel = 'TABEL'
             user_data = await state.get_data()
-            await show_employees_page(callback_query, page, region, status, tabel, smena)
+            employees_list = user_data['employees_list']
+            await show_employees_page(callback_query, page, region, status, tabel, employees_list, smena)
             
         elif callback_query.data.startswith("TABEL:write_"):
             await callback_query.answer()
             smena = callback_query.data.split("_")[1]
             logging.info(f'{smena}')
             user_data = await state.get_data()
-            with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
-                cur = con.cursor()
-                employees_list = (cur.execute('SELECT employees_list FROM variables WHERE user_id = ?', [user_id]).fetchone())[0]
-                employees_list = json.loads(employees_list)
+            employees_list = user_data['employees_list']
             day = user_data['day']
             current_month_year = datetime.now().strftime('%B_%Y').lower()
             tabel_time = "ошибка"
@@ -352,7 +356,8 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             status = 'active'
             tabel = 'TABEL'
             user_data = await state.get_data()
-            await show_employees_page(callback_query, page, region, status, tabel, smena)
+            employees_list = user_data['employees_list']
+            await show_employees_page(callback_query, page, region, status, tabel, employees_list, smena)
 
 
 
@@ -1178,29 +1183,14 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
 
 
 
-# Запись employees_list
-def update_employees_list(region, user_id, emp_id):
-    with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
-        cur = con.cursor()
-        employees_list = cur.execute(f'SELECT employees_list FROM variables WHERE user_id = {user_id}').fetchone()
-        if employees_list:
-            employees_list = employees_list[0]
-            employees_list.append(emp_id)
-        else:
-            employees_list = []
-            employees_list.append(emp_id)
-        data = json.dumps(employees_list)
-        cur.execute(f'UPDATE variables SET employees_list = ? WHERE id = {user_id}', [data,])
-        con.commit
-
 
 
 
 
 # Добавление смены
 @dp.message(tabel_add.tabelday)
-async def add_smena(callback_query, state: FSMContext, page, region, status, tabel, smena, user_id):    
-    await show_employees_page(callback_query, page, region, status, user_id, tabel, smena)
+async def add_smena(callback_query, state: FSMContext, page, region, status, tabel, employees_list, smena):    
+    await show_employees_page(callback_query, page, region, status, tabel, employees_list, smena)
     
 
 # Экспорт сотрудников в эксель
@@ -1845,6 +1835,7 @@ def is_pure_text_message(message: types.Message) -> bool:
 def get_employees_page(page: int, region: str, status) -> Tuple[List[Tuple], int]:
     """Получение страницы сотрудников и общего количества"""
     offset = (page - 1) * ITEMS_PER_PAGE
+    logging.info(f'{page}')
     with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
         cur = con.cursor()
         # Получаем сотрудников с статусом 'active' в алфавитном порядке
@@ -1866,30 +1857,26 @@ def get_employees_page(page: int, region: str, status) -> Tuple[List[Tuple], int
     return employees, total_count
 
 # Функция для форматирования сообщения
-def format_employees_message(employees: List[Tuple], page: int, total_pages: int, total_count: int, region, user_id, smena) -> str:
+def format_employees_message(employees: List[Tuple], page: int, total_pages: int, total_count: int, region, employees_list, smena) -> str:
     """Форматирование сообщения со списком сотрудников"""
 
     if not employees:
         return "Нет активных сотрудников"
     message_text = ""
-    with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
-        cur = con.cursor()
-        employees_list = cur.execute('SELECT employees_list FROM variables WHERE user_id = ?', [user_id]).fetchone()
-
     if employees_list:
-        employees_list = employees_list[0]
-        employees_list = json.loads(employees_list)
-        message_text += f"Добавляем {smena} смену:\n"
-        for employee in employees_list:
-            user_data = (cur.execute('SELECT fio FROM employees WHERE id = ?', [employee]).fetchone())[0]
-            message_text += f"{user_data}\n"
+        with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
+            cur = con.cursor()
+            message_text += f"Добавляем {smena} смену:\n"
+            for employee in employees_list:
+                user_data = (cur.execute('SELECT fio FROM employees WHERE id = ?', [employee]).fetchone())[0]
+                message_text += f"{user_data}\n"
         message_text += "\nВыбери нужного сотрудника"
     else:
         message_text += "Выбери нужного сотрудника"
     return message_text
 
 # Функция для создания клавиатуры пагинации
-def create_pagination_keyboard(page: int, total_pages: int, employees: List[Tuple], status, tabel, smena) -> types.InlineKeyboardMarkup:
+def create_pagination_keyboard(page: int, total_pages: int, employees: List[Tuple], status, tabel, employees_list, smena) -> types.InlineKeyboardMarkup:
     """Создание клавиатуры с сотрудниками и пагинацией"""
     keyboard = InlineKeyboardBuilder()
     
@@ -1898,7 +1885,7 @@ def create_pagination_keyboard(page: int, total_pages: int, employees: List[Tupl
         if tabel:
             keyboard.add(types.InlineKeyboardButton(
                 text=f"{fio}",
-                callback_data=f"{tabel}:employee_{emp_id}_{smena}_{page}"
+                callback_data=f"{tabel}:employee_{emp_id}_{employees_list}_{smena}_{page}"
             ))
         else:
             keyboard.add(types.InlineKeyboardButton(
@@ -1906,7 +1893,7 @@ def create_pagination_keyboard(page: int, total_pages: int, employees: List[Tupl
                 callback_data=f"employee_{emp_id}"
             ))
     
-    keyboard.adjust(3)  # По три кнопке в строке
+    keyboard.adjust(2)  # По одной кнопке в строке
     
     # Добавляем кнопки пагинации
     nav_buttons = []
@@ -1914,7 +1901,7 @@ def create_pagination_keyboard(page: int, total_pages: int, employees: List[Tupl
         if tabel:
             nav_buttons.append(types.InlineKeyboardButton(
                 text="◀️ Назад",
-                callback_data=f"{tabel}:page_{page-1}_{smena}"
+                callback_data=f"{tabel}:page_{page-1}_{employees_list}_{smena}"
             ))
         else:
             nav_buttons.append(types.InlineKeyboardButton(
@@ -1931,7 +1918,7 @@ def create_pagination_keyboard(page: int, total_pages: int, employees: List[Tupl
         if tabel:
             nav_buttons.append(types.InlineKeyboardButton(
                 text="Вперед ▶️",
-                callback_data=f"{tabel}:page_{page+1}_{smena}"
+                callback_data=f"{tabel}:page_{page+1}_{employees_list}_{smena}"
             ))
         else:
             nav_buttons.append(types.InlineKeyboardButton(
@@ -1941,16 +1928,16 @@ def create_pagination_keyboard(page: int, total_pages: int, employees: List[Tupl
     
     if nav_buttons:
         keyboard.row(*nav_buttons)
-    if smena:
+    if employees_list:
         keyboard.row(types.InlineKeyboardButton(text="✍️Зафиксировать смены в табель", callback_data=f"TABEL:write_{smena}"))
     
     # Добавляем кнопку возврата
-    keyboard.row(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
+    keyboard.row(types.InlineKeyboardButton(text="↪️ Назад в меню персонала", callback_data="personal"))
     
     return keyboard.as_markup()
 
 # Функция для отображения страницы сотрудников
-async def show_employees_page(callback_query: types.CallbackQuery, page: int, region: str, status, user_id=None, tabel = None, smena = None):
+async def show_employees_page(callback_query: types.CallbackQuery, page: int, region: str, status, tabel = None, employees_list = None, smena = None):
     """Отображение страницы с сотрудниками"""
     employees, total_count = get_employees_page(page, region, status)
     total_pages = (total_count + ITEMS_PER_PAGE - 1) // ITEMS_PER_PAGE
@@ -1959,8 +1946,8 @@ async def show_employees_page(callback_query: types.CallbackQuery, page: int, re
         page = total_pages
         employees, total_count = get_employees_page(page, region, status)
     
-    message_text = format_employees_message(employees, page, total_pages, total_count, region, user_id, smena)
-    keyboard = create_pagination_keyboard(page, total_pages, employees, status, tabel, smena)
+    message_text = format_employees_message(employees, page, total_pages, total_count, region, employees_list, smena)
+    keyboard = create_pagination_keyboard(page, total_pages, employees, status, tabel, employees_list, smena)
     
     await callback_query.message.edit_text(
         text=message_text,
