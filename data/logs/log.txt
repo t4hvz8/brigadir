@@ -2328,3 +2328,830 @@ Traceback (most recent call last):
     ^^^^^^^^^^^^^^^^^^^^^
 AttributeError: 'str' object has no attribute 'append'
 2026-02-11 22:59:05,813 - Текущее время: 22:59
+2026-02-12 18:31:08,567 - \U0001f310 Bot is running
+2026-02-12 18:31:08,584 - Бот запущен
+2026-02-12 18:31:08,585 - Start polling
+2026-02-12 18:31:08,585 - Текущее время: 18:31
+2026-02-12 18:31:09,073 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 18:31:09,417 - Константин from Omsk_Efes press start
+2026-02-12 18:31:09,441 - Константин from Omsk_Efes press start
+2026-02-12 18:31:10,565 - Update id=648812624 is handled. Duration 1150 ms by bot id=7139072705
+2026-02-12 18:31:10,588 - Update id=648812625 is handled. Duration 1148 ms by bot id=7139072705
+2026-02-12 18:31:13,290 - Update id=648812626 is handled. Duration 325 ms by bot id=7139072705
+2026-02-12 18:31:17,108 - Update id=648812627 is handled. Duration 2011 ms by bot id=7139072705
+2026-02-12 18:31:21,940 - Update id=648812628 is not handled. Duration 97 ms by bot id=7139072705
+2026-02-12 18:31:21,940 - Cause exception while process update id=648812628 by bot id=7139072705
+TypeError: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 300, in process_callback
+    await add_smena(callback_query, state, 1, region, status, tabel, smena, user_id)
+  File "e:\Python\Brig\start.py", line 1210, in add_smena
+    await show_employees_page(callback_query, page, region, status, user_id, tabel, smena)
+  File "e:\Python\Brig\start.py", line 1968, in show_employees_page
+    message_text = format_employees_message(employees, page, total_pages, total_count, region, user_id, smena)
+  File "e:\Python\Brig\start.py", line 1884, in format_employees_message
+    employees_list = (cur.execute('SELECT employees_list FROM variables WHERE user_id = ?', [user_id]).fetchone())[0]
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+TypeError: 'NoneType' object is not subscriptable
+2026-02-12 18:31:58,594 - Текущее время: 18:31
+2026-02-12 18:32:34,956 - Polling stopped
+2026-02-12 18:32:35,210 - Планировщик остановлен
+2026-02-12 18:32:35,211 - Polling stopped for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 18:32:41,531 - \U0001f310 Bot is running
+2026-02-12 18:32:41,534 - Бот запущен
+2026-02-12 18:32:41,534 - Start polling
+2026-02-12 18:32:41,535 - Текущее время: 18:32
+2026-02-12 18:32:41,880 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 18:32:49,597 - Константин from Omsk_Efes press start
+2026-02-12 18:32:50,537 - Update id=648812629 is handled. Duration 941 ms by bot id=7139072705
+2026-02-12 18:33:00,026 - Update id=648812630 is handled. Duration 1136 ms by bot id=7139072705
+2026-02-12 18:33:22,459 - Update id=648812631 is handled. Duration 958 ms by bot id=7139072705
+2026-02-12 18:33:25,634 - Update id=648812632 is handled. Duration 1799 ms by bot id=7139072705
+2026-02-12 18:33:31,550 - Текущее время: 18:33
+2026-02-12 18:33:32,975 - Update id=648812633 is not handled. Duration 972 ms by bot id=7139072705
+2026-02-12 18:33:32,975 - Cause exception while process update id=648812633 by bot id=7139072705
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 306, in process_callback
+    page = int(callback_query.data.split("_")[4])
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+2026-02-12 18:34:21,558 - Текущее время: 18:34
+2026-02-12 18:34:48,736 - Polling stopped
+2026-02-12 18:34:48,991 - Планировщик остановлен
+2026-02-12 18:34:48,991 - Polling stopped for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 18:34:55,079 - \U0001f310 Bot is running
+2026-02-12 18:34:55,083 - Бот запущен
+2026-02-12 18:34:55,084 - Start polling
+2026-02-12 18:34:55,084 - Текущее время: 18:34
+2026-02-12 18:34:55,443 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 18:35:45,095 - Текущее время: 18:35
+2026-02-12 18:36:07,005 - Polling stopped
+2026-02-12 18:36:07,267 - Планировщик остановлен
+2026-02-12 18:36:07,267 - Polling stopped for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 18:36:13,026 - \U0001f310 Bot is running
+2026-02-12 18:36:13,030 - Бот запущен
+2026-02-12 18:36:13,030 - Start polling
+2026-02-12 18:36:13,030 - Текущее время: 18:36
+2026-02-12 18:36:13,796 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 18:36:15,661 - Update id=648812634 is handled. Duration 1306 ms by bot id=7139072705
+2026-02-12 18:36:20,611 - Update id=648812635 is handled. Duration 983 ms by bot id=7139072705
+2026-02-12 18:36:24,167 - Update id=648812636 is handled. Duration 521 ms by bot id=7139072705
+2026-02-12 18:36:26,642 - Update id=648812637 is handled. Duration 826 ms by bot id=7139072705
+2026-02-12 18:36:29,815 - Update id=648812638 is handled. Duration 1627 ms by bot id=7139072705
+2026-02-12 18:36:31,795 - Update id=648812639 is not handled. Duration 409 ms by bot id=7139072705
+2026-02-12 18:36:31,795 - Cause exception while process update id=648812639 by bot id=7139072705
+KeyError: 'employees_list'
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 308, in process_callback
+    employees_list = user_data['employees_list']
+                     ~~~~~~~~~^^^^^^^^^^^^^^^^^^
+KeyError: 'employees_list'
+2026-02-12 18:37:03,031 - Текущее время: 18:37
+2026-02-12 18:37:53,035 - Текущее время: 18:37
+2026-02-12 18:38:43,036 - Текущее время: 18:38
+2026-02-12 18:39:33,038 - Текущее время: 18:39
+2026-02-12 18:40:23,051 - Текущее время: 18:40
+2026-02-12 18:41:13,067 - Текущее время: 18:41
+2026-02-12 18:42:03,081 - Текущее время: 18:42
+2026-02-12 18:42:53,082 - Текущее время: 18:42
+2026-02-12 18:43:43,092 - Текущее время: 18:43
+2026-02-12 18:43:51,644 - Update id=648812640 is handled. Duration 409 ms by bot id=7139072705
+2026-02-12 18:44:28,723 - Update id=648812641 is not handled. Duration 2 ms by bot id=7139072705
+2026-02-12 18:44:33,104 - Текущее время: 18:44
+2026-02-12 18:44:52,135 - Update id=648812642 is not handled. Duration 1 ms by bot id=7139072705
+2026-02-12 18:45:23,105 - Текущее время: 18:45
+2026-02-12 18:46:13,107 - Текущее время: 18:46
+2026-02-12 18:46:20,699 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-12 18:46:24,249 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-12 18:46:27,045 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-12 18:47:03,122 - Текущее время: 18:47
+2026-02-12 18:47:53,127 - Текущее время: 18:47
+2026-02-12 18:48:43,138 - Текущее время: 18:48
+2026-02-12 18:49:33,151 - Текущее время: 18:49
+2026-02-12 18:50:23,158 - Текущее время: 18:50
+2026-02-12 18:51:13,164 - Текущее время: 18:51
+2026-02-12 18:52:03,171 - Текущее время: 18:52
+2026-02-12 18:52:53,180 - Текущее время: 18:52
+2026-02-12 18:53:43,186 - Текущее время: 18:53
+2026-02-12 18:54:33,195 - Текущее время: 18:54
+2026-02-12 18:55:23,204 - Текущее время: 18:55
+2026-02-12 18:56:13,208 - Текущее время: 18:56
+2026-02-12 18:57:03,220 - Текущее время: 18:57
+2026-02-12 18:57:53,235 - Текущее время: 18:57
+2026-02-12 18:58:43,242 - Текущее время: 18:58
+2026-02-12 18:59:33,246 - Текущее время: 18:59
+2026-02-12 19:00:23,256 - Текущее время: 19:00
+2026-02-12 19:01:13,271 - Текущее время: 19:01
+2026-02-12 19:02:03,279 - Текущее время: 19:02
+2026-02-12 19:02:53,291 - Текущее время: 19:02
+2026-02-12 19:03:43,298 - Текущее время: 19:03
+2026-02-12 19:04:33,309 - Текущее время: 19:04
+2026-02-12 19:05:23,319 - Текущее время: 19:05
+2026-02-12 19:06:13,329 - Текущее время: 19:06
+2026-02-12 19:06:25,368 - Polling stopped
+2026-02-12 19:06:25,629 - Планировщик остановлен
+2026-02-12 19:06:25,629 - Polling stopped for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 19:06:36,491 - \U0001f310 Bot is running
+2026-02-12 19:06:36,495 - Бот запущен
+2026-02-12 19:06:36,495 - Start polling
+2026-02-12 19:06:36,495 - Текущее время: 19:06
+2026-02-12 19:06:36,879 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 19:06:37,301 - Константин from Omsk_Efes press start
+2026-02-12 19:06:38,245 - Update id=648812643 is handled. Duration 945 ms by bot id=7139072705
+2026-02-12 19:06:41,739 - Update id=648812644 is handled. Duration 1165 ms by bot id=7139072705
+2026-02-12 19:06:43,631 - Update id=648812645 is handled. Duration 1156 ms by bot id=7139072705
+2026-02-12 19:06:47,196 - Update id=648812646 is handled. Duration 771 ms by bot id=7139072705
+2026-02-12 19:06:52,575 - Update id=648812647 is not handled. Duration 100 ms by bot id=7139072705
+2026-02-12 19:06:52,575 - Cause exception while process update id=648812647 by bot id=7139072705
+TypeError: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 310, in process_callback
+    employees_list = (cur.execute('SELECT employees_list FROM variables WHERE user_id = ?', [user_id]).fetchone())[0]
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+TypeError: 'NoneType' object is not subscriptable
+2026-02-12 19:07:26,510 - Текущее время: 19:07
+2026-02-12 19:07:45,282 - Update id=648812648 is not handled. Duration 1 ms by bot id=7139072705
+2026-02-12 19:08:16,522 - Текущее время: 19:08
+2026-02-12 19:09:06,535 - Текущее время: 19:09
+2026-02-12 19:09:56,538 - Текущее время: 19:09
+2026-02-12 19:10:46,552 - Текущее время: 19:10
+2026-02-12 19:11:36,562 - Текущее время: 19:11
+2026-02-12 19:12:26,569 - Текущее время: 19:12
+2026-02-12 19:13:16,582 - Текущее время: 19:13
+2026-02-12 19:13:41,783 - Polling stopped
+2026-02-12 19:13:42,044 - Планировщик остановлен
+2026-02-12 19:13:42,045 - Polling stopped for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 19:13:47,578 - \U0001f310 Bot is running
+2026-02-12 19:13:47,581 - Бот запущен
+2026-02-12 19:13:47,581 - Start polling
+2026-02-12 19:13:47,582 - Текущее время: 19:13
+2026-02-12 19:13:47,953 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 19:14:08,914 - Update id=648812649 is handled. Duration 638 ms by bot id=7139072705
+2026-02-12 19:14:11,247 - Update id=648812650 is handled. Duration 667 ms by bot id=7139072705
+2026-02-12 19:14:14,896 - Update id=648812651 is handled. Duration 1539 ms by bot id=7139072705
+2026-02-12 19:14:17,846 - Update id=648812652 is handled. Duration 1558 ms by bot id=7139072705
+2026-02-12 19:14:19,290 - Update id=648812653 is not handled. Duration 97 ms by bot id=7139072705
+2026-02-12 19:14:19,290 - Cause exception while process update id=648812653 by bot id=7139072705
+UnboundLocalError: cannot access local variable 'result' where it is not associated with a value
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 317, in process_callback
+    employees_list = [result]
+                      ^^^^^^
+UnboundLocalError: cannot access local variable 'result' where it is not associated with a value
+2026-02-12 19:14:37,585 - Текущее время: 19:14
+2026-02-12 19:15:27,589 - Текущее время: 19:15
+2026-02-12 19:15:55,251 - Polling stopped
+2026-02-12 19:15:55,507 - Планировщик остановлен
+2026-02-12 19:15:55,508 - Polling stopped for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 19:16:05,014 - \U0001f310 Bot is running
+2026-02-12 19:16:05,018 - Бот запущен
+2026-02-12 19:16:05,018 - Start polling
+2026-02-12 19:16:05,018 - Текущее время: 19:16
+2026-02-12 19:16:05,752 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 19:16:06,792 - Update id=648812654 is handled. Duration 507 ms by bot id=7139072705
+2026-02-12 19:16:11,109 - Update id=648812655 is handled. Duration 918 ms by bot id=7139072705
+2026-02-12 19:16:13,072 - Update id=648812656 is not handled. Duration 451 ms by bot id=7139072705
+2026-02-12 19:16:13,072 - Cause exception while process update id=648812656 by bot id=7139072705
+TypeError: show_employees_page() missing 1 required positional argument: 'user_id'
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 414, in process_callback
+    await show_employees_page(callback_query, 1, region, status)
+          ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: show_employees_page() missing 1 required positional argument: 'user_id'
+2026-02-12 19:16:55,028 - Текущее время: 19:16
+2026-02-12 19:17:31,224 - Polling stopped
+2026-02-12 19:17:31,489 - Планировщик остановлен
+2026-02-12 19:17:31,489 - Polling stopped for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 19:17:41,510 - \U0001f310 Bot is running
+2026-02-12 19:17:41,513 - Бот запущен
+2026-02-12 19:17:41,514 - Start polling
+2026-02-12 19:17:41,514 - Текущее время: 19:17
+2026-02-12 19:17:42,319 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 19:17:43,822 - Update id=648812657 is handled. Duration 964 ms by bot id=7139072705
+2026-02-12 19:18:06,239 - Update id=648812658 is handled. Duration 1075 ms by bot id=7139072705
+2026-02-12 19:18:08,004 - Update id=648812659 is handled. Duration 1169 ms by bot id=7139072705
+2026-02-12 19:18:13,989 - Update id=648812660 is handled. Duration 1285 ms by bot id=7139072705
+2026-02-12 19:18:27,703 - Update id=648812661 is handled. Duration 1719 ms by bot id=7139072705
+2026-02-12 19:18:31,517 - Текущее время: 19:18
+2026-02-12 19:18:33,736 - Update id=648812662 is handled. Duration 350 ms by bot id=7139072705
+2026-02-12 19:19:00,526 - Update id=648812663 is handled. Duration 972 ms by bot id=7139072705
+2026-02-12 19:19:11,034 - Update id=648812664 is handled. Duration 1681 ms by bot id=7139072705
+2026-02-12 19:19:21,531 - Текущее время: 19:19
+2026-02-12 19:19:29,632 - Update id=648812665 is not handled. Duration 472 ms by bot id=7139072705
+2026-02-12 19:19:29,632 - Cause exception while process update id=648812665 by bot id=7139072705
+TypeError: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 317, in process_callback
+    update_employees_list(region, user_id, emp_id)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 1192, in update_employees_list
+    employees_list = (cur.execute(f'SELECT employees_list FROM variables WHERE user_id = {user_id}').fetchone())[0]
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+TypeError: 'NoneType' object is not subscriptable
+2026-02-12 19:20:11,544 - Текущее время: 19:20
+2026-02-12 19:20:28,515 - Polling stopped
+2026-02-12 19:20:28,778 - Планировщик остановлен
+2026-02-12 19:20:28,779 - Polling stopped for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 19:20:41,392 - \U0001f310 Bot is running
+2026-02-12 19:20:41,396 - Бот запущен
+2026-02-12 19:20:41,396 - Start polling
+2026-02-12 19:20:41,396 - Текущее время: 19:20
+2026-02-12 19:20:41,839 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 19:20:53,199 - Update id=648812666 is handled. Duration 1529 ms by bot id=7139072705
+2026-02-12 19:21:05,454 - Update id=648812667 is handled. Duration 1231 ms by bot id=7139072705
+2026-02-12 19:21:09,766 - Update id=648812668 is handled. Duration 850 ms by bot id=7139072705
+2026-02-12 19:21:12,974 - Update id=648812669 is handled. Duration 1843 ms by bot id=7139072705
+2026-02-12 19:21:15,506 - Update id=648812670 is handled. Duration 1794 ms by bot id=7139072705
+2026-02-12 19:21:23,187 - Update id=648812671 is handled. Duration 0 ms by bot id=7139072705
+2026-02-12 19:21:31,412 - Текущее время: 19:21
+2026-02-12 19:21:39,103 - Update id=648812672 is handled. Duration 0 ms by bot id=7139072705
+2026-02-12 19:22:07,316 - Update id=648812673 is handled. Duration 0 ms by bot id=7139072705
+2026-02-12 19:22:18,897 - Update id=648812674 is handled. Duration 2619 ms by bot id=7139072705
+2026-02-12 19:22:21,414 - Текущее время: 19:22
+2026-02-12 19:23:11,420 - Текущее время: 19:23
+2026-02-12 19:24:01,431 - Текущее время: 19:24
+2026-02-12 19:24:30,642 - Polling stopped
+2026-02-12 19:24:30,905 - Планировщик остановлен
+2026-02-12 19:24:30,905 - Polling stopped for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 19:24:36,127 - \U0001f310 Bot is running
+2026-02-12 19:24:36,131 - Бот запущен
+2026-02-12 19:24:36,131 - Start polling
+2026-02-12 19:24:36,131 - Текущее время: 19:24
+2026-02-12 19:24:36,513 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 19:24:42,056 - Update id=648812675 is handled. Duration 826 ms by bot id=7139072705
+2026-02-12 19:24:49,209 - Update id=648812676 is handled. Duration 1125 ms by bot id=7139072705
+2026-02-12 19:24:52,790 - Update id=648812677 is handled. Duration 1170 ms by bot id=7139072705
+2026-02-12 19:24:54,650 - ['1'] !!!! 1
+2026-02-12 19:24:56,396 - Update id=648812678 is handled. Duration 1951 ms by bot id=7139072705
+2026-02-12 19:25:26,140 - Текущее время: 19:25
+2026-02-12 19:26:16,151 - Текущее время: 19:26
+2026-02-12 19:27:06,165 - Текущее время: 19:27
+2026-02-12 19:27:56,178 - Текущее время: 19:27
+2026-02-12 19:28:46,180 - Текущее время: 19:28
+2026-02-12 19:29:12,835 - Polling stopped
+2026-02-12 19:29:13,095 - Планировщик остановлен
+2026-02-12 19:29:13,096 - Polling stopped for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 19:29:19,412 - \U0001f310 Bot is running
+2026-02-12 19:29:19,416 - Бот запущен
+2026-02-12 19:29:19,416 - Start polling
+2026-02-12 19:29:19,416 - Текущее время: 19:29
+2026-02-12 19:29:19,811 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 19:29:22,289 - Update id=648812679 is handled. Duration 562 ms by bot id=7139072705
+2026-02-12 19:29:24,782 - Update id=648812680 is handled. Duration 517 ms by bot id=7139072705
+2026-02-12 19:29:27,751 - Update id=648812681 is handled. Duration 1040 ms by bot id=7139072705
+2026-02-12 19:29:30,964 - Update id=648812682 is handled. Duration 1318 ms by bot id=7139072705
+2026-02-12 19:29:33,186 - Update id=648812683 is handled. Duration 906 ms by bot id=7139072705
+2026-02-12 19:30:09,423 - Текущее время: 19:30
+2026-02-12 19:30:59,425 - Текущее время: 19:30
+2026-02-12 19:31:49,433 - Текущее время: 19:31
+2026-02-12 19:32:39,440 - Текущее время: 19:32
+2026-02-12 19:33:29,452 - Текущее время: 19:33
+2026-02-12 19:34:19,455 - Текущее время: 19:34
+2026-02-12 19:35:09,457 - Текущее время: 19:35
+2026-02-12 19:35:59,470 - Текущее время: 19:35
+2026-02-12 19:36:49,486 - Текущее время: 19:36
+2026-02-12 19:37:39,490 - Текущее время: 19:37
+2026-02-12 19:38:29,497 - Текущее время: 19:38
+2026-02-12 19:39:19,499 - Текущее время: 19:39
+2026-02-12 19:39:25,776 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-12 19:39:27,840 - Не удалось удалить сообщение 900865796: Telegram server says - Bad Request: message to delete not found
+2026-02-12 19:40:09,504 - Текущее время: 19:40
+2026-02-12 19:40:59,507 - Текущее время: 19:40
+2026-02-12 19:41:49,518 - Текущее время: 19:41
+2026-02-12 19:42:39,529 - Текущее время: 19:42
+2026-02-12 19:43:25,089 - Polling stopped
+2026-02-12 19:43:25,344 - Планировщик остановлен
+2026-02-12 19:43:25,344 - Polling stopped for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 19:43:31,165 - \U0001f310 Bot is running
+2026-02-12 19:43:31,168 - Бот запущен
+2026-02-12 19:43:31,169 - Start polling
+2026-02-12 19:43:31,169 - Текущее время: 19:43
+2026-02-12 19:43:31,684 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 19:43:37,285 - Polling stopped
+2026-02-12 19:43:37,544 - Планировщик остановлен
+2026-02-12 19:43:37,544 - Polling stopped for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 19:43:43,179 - \U0001f310 Bot is running
+2026-02-12 19:43:43,182 - Бот запущен
+2026-02-12 19:43:43,182 - Start polling
+2026-02-12 19:43:43,183 - Текущее время: 19:43
+2026-02-12 19:43:43,521 - Run polling for bot @namnambot_bot id=7139072705 - 'Секретарь Ольга'
+2026-02-12 19:43:44,197 - Константин from Omsk_Efes press start
+2026-02-12 19:43:45,088 - Update id=648812684 is handled. Duration 891 ms by bot id=7139072705
+2026-02-12 19:44:16,640 - Update id=648812685 is handled. Duration 1480 ms by bot id=7139072705
+2026-02-12 19:44:18,150 - Update id=648812686 is handled. Duration 719 ms by bot id=7139072705
+2026-02-12 19:44:20,180 - Update id=648812687 is not handled. Duration 405 ms by bot id=7139072705
+2026-02-12 19:44:20,180 - Cause exception while process update id=648812687 by bot id=7139072705
+TypeError: the JSON object must be str, bytes or bytearray, not NoneType
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 304, in process_callback
+    await add_smena(callback_query, state, 1, region, status, tabel, smena, user_id)
+  File "e:\Python\Brig\start.py", line 1203, in add_smena
+    await show_employees_page(callback_query, page, region, status, user_id, tabel, smena)
+  File "e:\Python\Brig\start.py", line 1962, in show_employees_page
+    message_text = format_employees_message(employees, page, total_pages, total_count, region, user_id, smena)
+  File "e:\Python\Brig\start.py", line 1881, in format_employees_message
+    employees_list = json.loads(employees_list)
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 339, in loads
+    raise TypeError(f'the JSON object must be str, bytes or bytearray, '
+                    f'not {s.__class__.__name__}')
+TypeError: the JSON object must be str, bytes or bytearray, not NoneType
+2026-02-12 19:44:25,131 - Update id=648812688 is not handled. Duration 408 ms by bot id=7139072705
+2026-02-12 19:44:25,131 - Cause exception while process update id=648812688 by bot id=7139072705
+TypeError: the JSON object must be str, bytes or bytearray, not NoneType
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 304, in process_callback
+    await add_smena(callback_query, state, 1, region, status, tabel, smena, user_id)
+  File "e:\Python\Brig\start.py", line 1203, in add_smena
+    await show_employees_page(callback_query, page, region, status, user_id, tabel, smena)
+  File "e:\Python\Brig\start.py", line 1962, in show_employees_page
+    message_text = format_employees_message(employees, page, total_pages, total_count, region, user_id, smena)
+  File "e:\Python\Brig\start.py", line 1881, in format_employees_message
+    employees_list = json.loads(employees_list)
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 339, in loads
+    raise TypeError(f'the JSON object must be str, bytes or bytearray, '
+                    f'not {s.__class__.__name__}')
+TypeError: the JSON object must be str, bytes or bytearray, not NoneType
+2026-02-12 19:44:33,192 - Текущее время: 19:44
+2026-02-12 19:45:14,204 - Константин from Omsk_Efes press start
+2026-02-12 19:45:15,048 - Update id=648812689 is handled. Duration 846 ms by bot id=7139072705
+2026-02-12 19:45:16,873 - Update id=648812690 is handled. Duration 675 ms by bot id=7139072705
+2026-02-12 19:45:19,191 - Update id=648812691 is handled. Duration 1441 ms by bot id=7139072705
+2026-02-12 19:45:21,454 - Update id=648812692 is not handled. Duration 427 ms by bot id=7139072705
+2026-02-12 19:45:21,454 - Cause exception while process update id=648812692 by bot id=7139072705
+TypeError: the JSON object must be str, bytes or bytearray, not NoneType
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\fsm\middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        observer=observer, update_type=update_type, event=telegram_event, **data
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python313\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "e:\Python\Brig\start.py", line 304, in process_callback
+    await add_smena(callback_query, state, 1, region, status, tabel, smena, user_id)
+  File "e:\Python\Brig\start.py", line 1203, in add_smena
+    await show_employees_page(callback_query, page, region, status, user_id, tabel, smena)
+  File "e:\Python\Brig\start.py", line 1962, in show_employees_page
+    message_text = format_employees_message(employees, page, total_pages, total_count, region, user_id, smena)
+  File "e:\Python\Brig\start.py", line 1881, in format_employees_message
+    employees_list = json.loads(employees_list)
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 339, in loads
+    raise TypeError(f'the JSON object must be str, bytes or bytearray, '
+                    f'not {s.__class__.__name__}')
+TypeError: the JSON object must be str, bytes or bytearray, not NoneType
+2026-02-12 19:45:23,197 - Текущее время: 19:45
+2026-02-12 19:46:13,202 - Текущее время: 19:46
