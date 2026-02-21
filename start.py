@@ -18,6 +18,9 @@ from typing import Optional
 
 import pandas as pd
 
+
+
+
 from config import *
 
 from datetime import datetime
@@ -61,7 +64,7 @@ cur.close()
 con.close()
 
 logging.basicConfig(level=logging.INFO, filename='data/logs/log.txt', format='%(asctime)s - %(message)s')
-logging.info("🌐 Bot is running")
+logging.info("Bot is running")
 
 ITEMS_PER_PAGE = 18 # Количество сотрудников на 1 странице
 
@@ -113,7 +116,10 @@ async def start(message: types.Message, state: FSMContext):
     region = user_region(user_id)
     temp_path = f'data/temp/{user_id}'
     await state.clear()
-    os.makedirs(temp_path)
+    try:
+        os.makedirs(temp_path)
+    except:
+        pass
     if role:
         update_data_role_DB(user_id, name)
         logging.info(f"{name} from {region} press start")
@@ -125,6 +131,8 @@ async def start(message: types.Message, state: FSMContext):
             board.add(types.InlineKeyboardButton(text="Склад", callback_data="warehouse"))
         if role == 'admin' or role == 'manager' or role == 'brigadir':
             board.add(types.InlineKeyboardButton(text="Задания", callback_data="task"))
+        if role == 'admin' or role == 'manager' or role == 'brigadir':
+            board.add(types.InlineKeyboardButton(text="Шаблоны документов", callback_data="documents"))
         board.adjust(1)
         text = check_personal(region)
         sent_message = await message.answer (f"<i>Привет, {name}!!!\nАктивные работники на площадке {region}:</i>\n{text}", parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
@@ -157,6 +165,8 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
                 board.add(types.InlineKeyboardButton(text="Склад", callback_data="warehouse"))
             if role == 'admin' or role == 'manager' or role == 'brigadir':
                 board.add(types.InlineKeyboardButton(text="Задания", callback_data="task"))
+            if role == 'admin' or role == 'manager' or role == 'brigadir':
+                board.add(types.InlineKeyboardButton(text="Шаблоны документов", callback_data="documents"))
             board.adjust(1)
             text = check_personal(region)
             try:
@@ -182,6 +192,27 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             board = InlineKeyboardBuilder()
             board.add(types.InlineKeyboardButton(text="Ясно", callback_data="OK"))
             sent_message = await callback_query.message.edit_text (f'Ваша роль - {role} из {region}', parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
+            asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
+
+        elif data == "documents":
+            await callback_query.answer()
+            if state:
+                await state.clear()
+            board = InlineKeyboardBuilder()
+            board.add(types.InlineKeyboardButton(text="Направление на МО", callback_data="doc_MO"))
+            board.row(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
+            sent_message = await callback_query.message.edit_text (f'Выбирай нужный пункт', parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
+            asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
+        
+        elif data == "doc_MO":
+            await callback_query.answer()
+            if state:
+                await state.clear()
+            path = f'data/docs/{region}/мо.zip'
+            document = FSInputFile(path)
+            board = InlineKeyboardBuilder()
+            board.add(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
+            sent_message = await bot.send_document(chat_id=user_id, document=document, caption="Набор шаблонов по всем должностям", parse_mode="HTML", reply_markup=board.as_markup())
             asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
 
         elif data == "personal":
@@ -238,12 +269,14 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             await callback_query.answer()
             if state:
                 await state.clear()
+            logging.info(f'Проверяем наличие таблицы в {region}')
             sql_columns = []
             for day in range(1, 32):
                 sql_columns.append(f"day_{day}")
             current_month_year = datetime.now().strftime('%B_%Y').lower()
+            tabel_name = f'TABEL_{current_month_year}'
             create_table_sql = f"""
-            CREATE TABLE IF NOT EXISTS TABEL_{current_month_year} (
+            CREATE TABLE IF NOT EXISTS {tabel_name} (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 full_name VARCHAR (100),
                 position VARCHAR (100),
@@ -260,16 +293,17 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
                 cur.execute(f"""
                     SELECT name 
                     FROM sqlite_master 
-                    WHERE type='table' AND name='TABEL_{current_month_year}'
+                    WHERE type='table' AND name='{tabel_name}'
                 """)
                 table_exists = cur.fetchone()
                 if not table_exists:
+                    logging.info('Таблицы нет. Создаем новую')
                     cur.execute(create_table_sql)
                     con.commit()
                     result_position = cur.execute('SELECT full_name, position FROM employees WHERE status = ?', ['active']).fetchall()
                     text = ""
                     for result in result_position:
-                        cur.execute(f'INSERT INTO TABEL_{current_month_year} (full_name, position) VALUES (?, ?)', (result[0], result[1]))
+                        cur.execute(f'INSERT INTO {tabel_name} (full_name, position) VALUES (?, ?)', (result[0], result[1]))
                     con.commit()
 
             text = f"Месяц {datetime.now().strftime('%B')}"
@@ -286,7 +320,7 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             await callback_query.answer()
             if state:
                 await state.clear()
-            output_excel_path = f'{temp_path}/{user_id}_TABEL.xlsx'
+            output_excel_path = f'{temp_path}/TABEL.xlsx'
             file = process_tabel_tables(region, output_excel_path)
             if file:
                 await callback_query.message.delete()
@@ -294,7 +328,7 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
                 board.row(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
                 document = FSInputFile(output_excel_path)
                 sent_message = await bot.send_document(chat_id=user_id, document=document, caption="Файл в формате Excel", parse_mode="HTML", reply_markup=board.as_markup())
-                clear_folder(temp_path)
+                await clear_folder(temp_path)
                 asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
                 
             else:
@@ -312,8 +346,12 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             text = "Добавляем дневные смены, выбирай дату"
             days = tabel_days()
             board = InlineKeyboardBuilder()
+            today_day = datetime.now().day
             for day in days:
-                board.row(types.InlineKeyboardButton(text=f"{day}", callback_data=f"ddday_{day}"))
+                day_text = day
+                if day == today_day:
+                    day_text = f'👉{day}'
+                board.row(types.InlineKeyboardButton(text=f"{day_text}", callback_data=f"ddday_{day}"))
             board.adjust(*[6] * len(days), 1)
             board.row(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
             sent_message = await callback_query.message.edit_text (f'{text}', parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
@@ -328,8 +366,12 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             text = "Добавляем ночные смены, выбирай дату"
             days = tabel_days()
             board = InlineKeyboardBuilder()
+            today_day = datetime.now().day
             for day in days:
-                board.row(types.InlineKeyboardButton(text=f"{day}", callback_data=f"ddday_{day}"))
+                day_text = day
+                if day == today_day:
+                    day_text = f'👉{day}'
+                board.row(types.InlineKeyboardButton(text=f"{day_text}", callback_data=f"ddday_{day}"))
             board.adjust(*[6] * len(days), 1)
             board.row(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
             sent_message = await callback_query.message.edit_text (f'{text}', parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
@@ -346,7 +388,7 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             board = InlineKeyboardBuilder()
             for hour in hours:
                 board.add(types.InlineKeyboardButton(text=f"{hour}", callback_data=f"smenaDAY:special_{hour}"))
-            board.adjust(6, 6, 6, 6)
+            board.adjust(5, 5, 5, 5, 5)
             board.row(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
             sent_message = await callback_query.message.edit_text (f'{text}', parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
             asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
@@ -359,7 +401,7 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             board = InlineKeyboardBuilder()
             for hour in hours:
                 board.add(types.InlineKeyboardButton(text=f"{hour}", callback_data=f"smenaNIGHT:special_{hours_day}_{hour}"))
-            board.adjust(6, 6, 6, 6)
+            board.adjust(5, 5, 5, 5, 5)
             board.row(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
             sent_message = await callback_query.message.edit_text (f'{text}', parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
             asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
@@ -371,9 +413,13 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             text = f"Добавляем нестандартную смену {smena_hours}, выбирай дату"
             days = tabel_days()
             board = InlineKeyboardBuilder()
+            today_day = datetime.now().day
             for day in days:
-                board.row(types.InlineKeyboardButton(text=f"{day}", callback_data=f"ddday_{day}"))
-            board.adjust(*[8] * len(days), 1)
+                day_text = day
+                if day == today_day:
+                    day_text = f'👉{day}'
+                board.row(types.InlineKeyboardButton(text=f"{day_text}", callback_data=f"ddday_{day}"))
+            board.adjust(*[6] * len(days), 1)
             board.row(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
             sent_message = await callback_query.message.edit_text (f'{text}', parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
             asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
@@ -1296,12 +1342,6 @@ def process_tabel_tables(region, output_excel_path):
                     all_dataframes[table_name] = df
                     continue
                 
-                # Создаем новые колонки для сумм
-                #df['calculated_itogo'] = 0
-                #df['calculated_day'] = 0
-                #df['calculated_night'] = 0
-                #df['calculated_vsego_smen'] = 0
-                
                 # Обрабатываем каждую строку
                 for idx, row in df.iterrows():
                     total_hours = 0
@@ -1329,12 +1369,13 @@ def process_tabel_tables(region, output_excel_path):
                                         total_shifts += 1
                                         
                                 except (ValueError, AttributeError):
-                                    logging.error(f"Обработка таблицы: {table_name}")
+                                    logging.error(f"Ошибка обработки значения в таблице {table_name}, строка {idx}, день {day}")
+                    
                     # Записываем рассчитанные значения
-                    df.at[idx, 'calculated_itogo'] = round(total_hours, 2)
-                    df.at[idx, 'calculated_day'] = round(total_day_hours, 2)
-                    df.at[idx, 'calculated_night'] = round(total_night_hours, 2)
-                    df.at[idx, 'calculated_vsego_smen'] = int(total_shifts)
+                    df.at[idx, 'itogo'] = round(total_hours, 2)
+                    df.at[idx, 'day'] = round(total_day_hours, 2)
+                    df.at[idx, 'night'] = round(total_night_hours, 2)
+                    df.at[idx, 'vsego_smen'] = int(total_shifts)
                 
                 # Обновляем значения в базе данных (если нужно сохранить расчеты)
                 cursor = con.cursor()
@@ -1344,16 +1385,37 @@ def process_tabel_tables(region, output_excel_path):
                         SET itogo = ?, day = ?, night = ?, vsego_smen = ?
                         WHERE id = ?
                     """, (
-                        row['calculated_itogo'],
-                        row['calculated_day'],
-                        row['calculated_night'],
-                        row['calculated_vsego_smen'],
+                        row['itogo'],
+                        row['day'],
+                        row['night'],
+                        row['vsego_smen'],
                         row['id']
                     ))
                 con.commit()
                 
+                # Переименовываем столбцы для экспорта
+                df_export = df.copy()
+                
+                # Переименовываем day_1...day_31 в просто цифры
+                rename_dict = {}
+                for day in range(1, 32):
+                    old_name = f'day_{day}'
+                    if old_name in df_export.columns:
+                        rename_dict[old_name] = str(day)
+                
+                # Добавляем переименование итоговых столбцов
+                rename_dict.update({
+                    'itogo': 'итого',
+                    'day': 'дневные',
+                    'night': 'ночные',
+                    'vsego_smen': 'всего смен'
+                })
+                
+                # Применяем переименование
+                df_export = df_export.rename(columns=rename_dict)
+                
                 # Сохраняем обработанный DataFrame для экспорта
-                all_dataframes[table_name] = df
+                all_dataframes[table_name] = df_export
                 
                 logging.info(f"  Обработано записей: {len(df)}")
                 
@@ -1372,7 +1434,6 @@ def process_tabel_tables(region, output_excel_path):
         except Exception as e:
             logging.info(f"Ошибка: {e}")
     return True
-
 
 
 # Добавление смены
@@ -1987,10 +2048,7 @@ async def add_newpersonphoto(message: Message, state: FSMContext):
 # генерация массива 1-31
 def tabel_days():
     days = []
-    today_day = datetime.now().day
     for i in range (1, 32):
-        if i == today_day:
-            i = f'👉{i}'
         days.append(i)
     return days
 
@@ -2075,17 +2133,27 @@ async def format_employees_message(employees: List[Tuple], region, smena, state)
     return message_text
 
 # Функция для создания клавиатуры пагинации
-def create_pagination_keyboard(page: int, total_pages: int, employees: List[Tuple], status, tabel, smena) -> types.InlineKeyboardMarkup:
+async def create_pagination_keyboard(page: int, total_pages: int, employees: List[Tuple], status, tabel, smena, state) -> types.InlineKeyboardMarkup:
     """Создание клавиатуры с сотрудниками и пагинацией"""
     keyboard = InlineKeyboardBuilder()
+    if state is not None:
+        user_data = await state.get_data()
+        employees_list = user_data.get('employees_list')
     
     # Добавляем кнопки сотрудников
     for emp_id, fio in employees:
         if tabel:
-            keyboard.add(types.InlineKeyboardButton(
-                text=f"{fio}",
-                callback_data=f"{tabel}:employee_{emp_id}_{smena}_{page}"
-            ))
+            if str(emp_id) in employees_list:
+                keyboard.add(types.InlineKeyboardButton(
+                    text=f"✅{fio}",
+                    callback_data=f"{tabel}:employee_{emp_id}_{smena}_{page}"
+                ))
+            else:
+                keyboard.add(types.InlineKeyboardButton(
+                    text=f"{fio}",
+                    callback_data=f"{tabel}:employee_{emp_id}_{smena}_{page}"
+                ))
+            
         else:
             keyboard.add(types.InlineKeyboardButton(
                 text=f"{fio}",
@@ -2146,8 +2214,11 @@ async def show_employees_page(callback_query: types.CallbackQuery, page: int, re
         page = total_pages
         employees, total_count = get_employees_page(page, region, status)
     message_text = await format_employees_message(employees, region, smena, state)
-    keyboard = create_pagination_keyboard(page, total_pages, employees, status, tabel, smena)
-    
+    keyboard = await create_pagination_keyboard(page, total_pages, employees, status, tabel, smena, state)
+    if state is not None:
+        user_data = await state.get_data()
+        day = user_data.get('day')
+        logging.info(f'День_{day}')
     await callback_query.message.edit_text(
         text=message_text,
         reply_markup=keyboard, 
@@ -2243,6 +2314,55 @@ async def send_daily_report():
                     except Exception as e:
                         logging.error(f"Ошибка отправки сообщения в регионе {region}: {e}")
 
+
+async def send_birthday_report():
+    current_date = datetime.now().strftime("%m-%d")
+    
+    with sqlite3.connect('data/db/role.db') as con:
+        cur = con.cursor()
+        result_regions = cur.execute('SELECT name FROM regions').fetchall()
+    
+    for region_tuple in result_regions:    
+        region = region_tuple[0]
+        text = 'Сегодня день рождения\n'  # Перенесено внутрь цикла
+        
+        with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
+            cur = con.cursor()
+            chat_id_result = cur.execute('SELECT chat_id FROM DATA WHERE status = "active"').fetchone()
+            
+            if not chat_id_result:
+                logging.error(f"Не найден chat_id для региона {region}")
+                continue
+                
+            chatID = chat_id_result[0]
+            result = cur.execute('SELECT * FROM employees WHERE status = "active"').fetchall()
+            
+            if result:
+                birthday_found = False
+                for row in result:
+                    # Создаем новую строку, а не изменяем кортеж
+                    birth_date = row[6][5:] if row[6] else ""  # Получаем ММ-ДД из даты
+                    logging.info(f'Проверяем ДР: {birth_date}')
+                    if birth_date == current_date:
+                        text += f"{row[2]}\n"
+                        birthday_found = True
+                
+                if birthday_found:
+                    try:
+                        await bot.send_message(
+                            chat_id=chatID, 
+                            text=text, 
+                            parse_mode="HTML", 
+                            disable_web_page_preview=True
+                        )
+                    except Exception as e:
+                        logging.error(f"Ошибка отправки сообщения в регионе {region}: {e}")
+
+            
+
+
+
+
 # Воркер для шедулера
 async def schedule_worker():
     """Асинхронный планировщик"""
@@ -2255,6 +2375,7 @@ async def schedule_worker():
         if current_time == "08:00":  # Замените на нужное время
             try:
                 await send_daily_report()
+                await send_birthday_report()
             except Exception as e:
                 logging.error(f"Ошибка выполнения daily report: {e}")
             
@@ -2271,7 +2392,8 @@ def run_schedule():
         time.sleep(1)
 
 # Отчистка временных файлов
-def clear_folder(folder_path):
+async def clear_folder(folder_path):
+    await asyncio.sleep(60)
     # Проверяем, существует ли папка
     if not os.path.exists(folder_path):
         logging.error(f"Папка {folder_path} не существует")
