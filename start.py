@@ -34,17 +34,21 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.types.input_file import FSInputFile
 from aiogram.types import Message
 
+from aiogram.filters import StateFilter
+
 from typing import List, Tuple
 
 
-
+from cryptography.fernet import Fernet
+import hashlib
+import base64
 
 # Инициализация бота и диспетчера
 bot = Bot(token=TOKEN)
 storage = MemoryStorage()
 dp = Dispatcher(storage=storage)
 
-   
+
     
 # Создаем базу доступа
 con = sqlite3.connect('data/db/role.db')
@@ -106,16 +110,24 @@ class tabel_add(StatesGroup):
     tabelday = State()    
     special = State()
 
+class test_code(StatesGroup):
+    waiting_for_data = State()
 
+
+print ('старт бота')
 # Обработчик команды /start
 @dp.message(Command("start"))
-async def start(message: types.Message, state: FSMContext):
+async def start_command(message: types.Message, state: FSMContext):
+    await state.clear()
     user_id = message.from_user.id
     name = message.chat.first_name
     role = user_role(user_id)
     region = user_region(user_id)
     temp_path = f'data/temp/{user_id}'
     await state.clear()
+       
+    # Создаем ключ шифрования (один раз при запуске)
+
     try:
         os.makedirs(temp_path)
     except:
@@ -126,13 +138,17 @@ async def start(message: types.Message, state: FSMContext):
         board = InlineKeyboardBuilder()
         if role == 'admin' or role == 'manager' or role == 'brigadir':
             board.add(types.InlineKeyboardButton(text="Персонал", callback_data="personal"))
-            board.add(types.InlineKeyboardButton(text="Табелирование", callback_data="personalTABEL"))    
+            #board.add(types.InlineKeyboardButton(text="Табелирование", callback_data="personalTABEL")) 
+            board.add(types.InlineKeyboardButton(text="Табель", url="https://docs.google.com/spreadsheets/d/1O9Xf7xVNJ5QJlQBGeqK1siCjzDkK3SBa5YJFYZk8fwE/edit?gid=184192645#gid=184192645")) 
         if role == 'admin' or role == 'manager' or role == 'brigadir':
-            board.add(types.InlineKeyboardButton(text="Склад", callback_data="warehouse"))
+            board.add(types.InlineKeyboardButton(text="Склад", url="https://docs.google.com/spreadsheets/d/1ze7wOxCwCNHbXsnBBWz7YNryRybRt8GngM5a2BU5wIA/edit?gid=573968277#gid=573968277"))
         if role == 'admin' or role == 'manager' or role == 'brigadir':
             board.add(types.InlineKeyboardButton(text="Задания", callback_data="task"))
         if role == 'admin' or role == 'manager' or role == 'brigadir':
             board.add(types.InlineKeyboardButton(text="Шаблоны документов", callback_data="documents"))
+        if role == 'admin':
+            board.add(types.InlineKeyboardButton(text="Проверка", callback_data="check"))
+            board.add(types.InlineKeyboardButton(text="Расшифровка", callback_data="check2"))
         board.adjust(1)
         text = check_personal(region)
         sent_message = await message.answer (f"<i>Привет, {name}!!!\nАктивные работники на площадке {region}:</i>\n{text}", parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
@@ -158,15 +174,19 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             await callback_query.answer()
             await state.clear()
             board = InlineKeyboardBuilder()
-            if role == 'admin':
+            if role == 'admin' or role == 'manager' or role == 'brigadir':
                 board.add(types.InlineKeyboardButton(text="Персонал", callback_data="personal"))
-                board.add(types.InlineKeyboardButton(text="Табелирование", callback_data="personalTABEL")) 
-            if role == 'admin' or role == 'manager':
-                board.add(types.InlineKeyboardButton(text="Склад", callback_data="warehouse"))
+            #board.add(types.InlineKeyboardButton(text="Табелирование", callback_data="personalTABEL")) 
+                board.add(types.InlineKeyboardButton(text="Табель", url="https://docs.google.com/spreadsheets/d/1O9Xf7xVNJ5QJlQBGeqK1siCjzDkK3SBa5YJFYZk8fwE/edit?gid=184192645#gid=184192645")) 
+            if role == 'admin' or role == 'manager' or role == 'brigadir':
+                board.add(types.InlineKeyboardButton(text="Склад", url="https://docs.google.com/spreadsheets/d/1ze7wOxCwCNHbXsnBBWz7YNryRybRt8GngM5a2BU5wIA/edit?gid=573968277#gid=573968277"))
             if role == 'admin' or role == 'manager' or role == 'brigadir':
                 board.add(types.InlineKeyboardButton(text="Задания", callback_data="task"))
             if role == 'admin' or role == 'manager' or role == 'brigadir':
                 board.add(types.InlineKeyboardButton(text="Шаблоны документов", callback_data="documents"))
+            if role == 'admin':
+                board.add(types.InlineKeyboardButton(text="Проверка", callback_data="check"))
+            board.add(types.InlineKeyboardButton(text="Расшифровка", callback_data="check2"))
             board.adjust(1)
             text = check_personal(region)
             try:
@@ -185,14 +205,62 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
                 )
                 asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
 
-        elif data == "role":
+        elif data == "check":
             await callback_query.answer()
             if state:
                 await state.clear()
+            await state.set_state(test_code.waiting_for_data)
             board = InlineKeyboardBuilder()
-            board.add(types.InlineKeyboardButton(text="Ясно", callback_data="OK"))
-            sent_message = await callback_query.message.edit_text (f'Ваша роль - {role} из {region}', parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
+            board.add(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
+            sent_message = await callback_query.message.edit_text (f'Вводи текст для шифрования', parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
             asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
+
+
+        elif data == "check2":
+            await callback_query.answer()
+            if state:
+                await state.clear()
+            with sqlite3.connect(f'data/db/work db/warehouse_{region}.db') as con:
+                cur = con.cursor()
+                encrypted_data = (cur.execute('SELECT data FROM test WHERE id = "1"').fetchone())[0]
+            text = decrypt_data(encrypted_data)
+            board = InlineKeyboardBuilder()
+            board.add(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
+            sent_message = await callback_query.message.edit_text (f'Расшифрованный текст\n{text}', parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
+            asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         elif data == "documents":
             await callback_query.answer()
@@ -200,7 +268,6 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
                 await state.clear()
             board = InlineKeyboardBuilder()
             board.add(types.InlineKeyboardButton(text="Направление на МО", callback_data="doc_MO"))
-            board.row(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
             sent_message = await callback_query.message.edit_text (f'Выбирай нужный пункт', parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
             asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
         
@@ -2279,11 +2346,15 @@ def check_personal(region):
         cur = con.cursor()
         result_position = cur.execute('SELECT position FROM Position WHERE status = ?', ['активна']).fetchall()
         text = ""
+        i = 0
         for position_tuple in result_position:
             position = position_tuple[0]
             result_employees = cur.execute(f'SELECT id FROM employees WHERE position = ? AND status = "active"', [position]).fetchall()
             data = len(result_employees)
             text += f'<i><u>{position}</u> - {data}</i>\n'
+            i += data
+        text += f'<b>Всего {i} сотрудников</b>\n'
+
     return text
 
 async def send_daily_report():
@@ -2413,6 +2484,61 @@ async def clear_folder(folder_path):
             logging.error(f'Не удалось удалить {file_path}. Причина: {e}')
 
 
+# Генерация ключа шифрования из строки
+def generate_fernet_key(password: str) -> bytes:
+    """Генерирует ключ Fernet из пароля"""
+    # Fernet требует ключ длиной 32 байта в base64-url формате
+    key = hashlib.sha256(password.encode()).digest()
+    return base64.urlsafe_b64encode(key)
+
+# Функции для работы с данными
+def encrypt_data(data: str) -> str:
+    """Шифрует данные"""
+    SECRET_KEY = "t4hvz8ov!"
+    CIPHER_KEY = generate_fernet_key(SECRET_KEY)
+    cipher = Fernet(CIPHER_KEY)
+    return cipher.encrypt(data.encode()).decode()
+
+def decrypt_data(encrypted_data: str) -> str:
+    """Дешифрует данные"""
+    SECRET_KEY = "t4hvz8ov!"
+    CIPHER_KEY = generate_fernet_key(SECRET_KEY)
+    cipher = Fernet(CIPHER_KEY)
+    return cipher.decrypt(encrypted_data.encode()).decode()
+
+def save_user_data(data: str, region):
+    """Сохраняет зашифрованные данные пользователя"""
+    encrypted = encrypt_data(data)
+    conn = sqlite3.connect(f'data/db/work db/warehouse_{region}.db')
+    cursor = conn.cursor()
+    cursor.execute(f'UPDATE test SET data = ? WHERE id = "1"', [encrypted])
+    conn.commit()
+    conn.close()
+
+def get_user_data(user_id: int) -> str:
+    """Получает и дешифрует данные пользователя"""
+    conn = sqlite3.connect('user_data.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT encrypted_data FROM users WHERE user_id = ?', (user_id,))
+    result = cursor.fetchone()
+    conn.close()
+    
+    if result:
+        return decrypt_data(result[0])
+    return None
+
+# Тест шифрование
+@dp.message(test_code.waiting_for_data)
+async def test_test(message: Message, state: FSMContext):
+    user_id = message.from_user.id
+    user_data = await state.get_data()
+    new_data = message.text
+    save_user_data(new_data, 'Omsk_Efes')
+    
+
+
+
+
 
 
 # Запуск бота
@@ -2424,6 +2550,7 @@ async def main():
         # Запускаем бота
         logging.info("Бот запущен")
         await dp.start_polling(bot, skip_updates=True)
+        
     except Exception as e:
         logging.error(f"Ошибка при запуске бота: {e}")
     finally:
