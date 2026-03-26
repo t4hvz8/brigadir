@@ -2443,7 +2443,7 @@ async def schedule_worker():
         current_time = now.strftime("%H:%M")
         logging.info(f"Текущее время: {current_time}")
         # Проверяем, нужно ли выполнить задачу
-        if current_time == "18:23":  # Замените на нужное время
+        if current_time == "18:26":  # Замените на нужное время
             try:
                 await send_daily_report()
                 await send_birthday_report()
