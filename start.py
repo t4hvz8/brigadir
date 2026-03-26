@@ -114,7 +114,7 @@ class test_code(StatesGroup):
     waiting_for_data = State()
 
 
-print ('старт бота')
+print ('Bot start')
 # Обработчик команды /start
 @dp.message(Command("start"))
 async def start_command(message: types.Message, state: FSMContext):
@@ -2443,12 +2443,18 @@ async def schedule_worker():
         current_time = now.strftime("%H:%M")
         logging.info(f"Текущее время: {current_time}")
         # Проверяем, нужно ли выполнить задачу
-        if current_time == "18:26":  # Замените на нужное время
+        if current_time == "18:33":  # Замените на нужное время
             try:
                 await send_daily_report()
                 await send_birthday_report()
             except Exception as e:
                 logging.error(f"Ошибка выполнения daily report: {e}")
+                await bot.send_message(
+                            chat_id=900865796, 
+                            text=f"Ошибка выполнения daily report: {e}", 
+                            parse_mode="HTML", 
+                            disable_web_page_preview=True
+                        )
             
             # Ждем минуту, чтобы не выполнять задачу несколько раз в течение минуты
             await asyncio.sleep(60)
