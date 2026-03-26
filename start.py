@@ -147,6 +147,8 @@ async def start_command(message: types.Message, state: FSMContext):
         if role == 'admin' or role == 'manager' or role == 'brigadir':
             board.add(types.InlineKeyboardButton(text="Шаблоны документов", callback_data="documents"))
         if role == 'admin':
+            board.add(types.InlineKeyboardButton(text="Время", callback_data="time_is"))
+            board.add(types.InlineKeyboardButton(text="Логи", callback_data="logs"))
             board.add(types.InlineKeyboardButton(text="Проверка", callback_data="check"))
             board.add(types.InlineKeyboardButton(text="Расшифровка", callback_data="check2"))
         board.adjust(1)
@@ -185,8 +187,10 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             if role == 'admin' or role == 'manager' or role == 'brigadir':
                 board.add(types.InlineKeyboardButton(text="Шаблоны документов", callback_data="documents"))
             if role == 'admin':
+                board.add(types.InlineKeyboardButton(text="Время", callback_data="time_is"))
+                board.add(types.InlineKeyboardButton(text="Логи", callback_data="logs"))
                 board.add(types.InlineKeyboardButton(text="Проверка", callback_data="check"))
-            board.add(types.InlineKeyboardButton(text="Расшифровка", callback_data="check2"))
+                board.add(types.InlineKeyboardButton(text="Расшифровка", callback_data="check2"))
             board.adjust(1)
             text = check_personal(region)
             try:
@@ -205,6 +209,28 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
                 )
                 asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
 
+        elif data == "logs":
+            await callback_query.answer()
+            if state:
+                await state.clear()
+            file = FSInputFile("data/logs/log.txt")
+            board = InlineKeyboardBuilder()
+            board.add(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
+            sent_message = await bot.send_document(callback_query.from_user.id, document=file, reply_markup=board.as_markup())
+            asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
+
+        
+        elif data == "time_is":
+            await callback_query.answer()
+            if state:
+                await state.clear()
+            now = datetime.now()
+            current_time = now.strftime("%H:%M")
+            board = InlineKeyboardBuilder()
+            board.add(types.InlineKeyboardButton(text="↪️Главное меню↩️", callback_data="OK"))
+            sent_message = await callback_query.message.edit_text (f'Текущее время {current_time}', parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
+            asyncio.create_task(delete_message_after_delay(sent_message.chat.id, sent_message.message_id))
+        
         elif data == "check":
             await callback_query.answer()
             if state:
