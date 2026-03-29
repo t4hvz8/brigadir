@@ -149,8 +149,8 @@ async def start_command(message: types.Message, state: FSMContext):
         if role == 'admin':
             board.add(types.InlineKeyboardButton(text="Время", callback_data="time_is"))
             board.add(types.InlineKeyboardButton(text="Логи", callback_data="logs"))
-            board.add(types.InlineKeyboardButton(text="Проверка", callback_data="check"))
-            board.add(types.InlineKeyboardButton(text="Расшифровка", callback_data="check2"))
+#            board.add(types.InlineKeyboardButton(text="Проверка", callback_data="check"))
+#            board.add(types.InlineKeyboardButton(text="Расшифровка", callback_data="check2"))
         board.adjust(1)
         text = check_personal(region)
         sent_message = await message.answer (f"<i>Привет, {name}!!!\nАктивные работники на площадке {region}:</i>\n{text}", parse_mode="HTML", disable_web_page_preview=True, reply_markup=board.as_markup())
@@ -189,8 +189,8 @@ async def process_callback(callback_query: types.CallbackQuery, state: FSMContex
             if role == 'admin':
                 board.add(types.InlineKeyboardButton(text="Время", callback_data="time_is"))
                 board.add(types.InlineKeyboardButton(text="Логи", callback_data="logs"))
-                board.add(types.InlineKeyboardButton(text="Проверка", callback_data="check"))
-                board.add(types.InlineKeyboardButton(text="Расшифровка", callback_data="check2"))
+#                board.add(types.InlineKeyboardButton(text="Проверка", callback_data="check"))
+#               board.add(types.InlineKeyboardButton(text="Расшифровка", callback_data="check2"))
             board.adjust(1)
             text = check_personal(region)
             try:
@@ -2466,10 +2466,10 @@ async def schedule_worker():
     while True:
         # Получаем текущее время
         now = datetime.now()
-        current_time = now.strftime("%H:%M")
+        current_time = now.strftime("%H")
         logging.info(f"Текущее время: {current_time}")
         # Проверяем, нужно ли выполнить задачу
-        if current_time == "2:00":  # Замените на нужное время
+        if current_time == "03":  
             try:
                 await send_daily_report()
                 await send_birthday_report()
@@ -2482,10 +2482,10 @@ async def schedule_worker():
                             disable_web_page_preview=True
                         )
             
-            # Ждем минуту, чтобы не выполнять задачу несколько раз в течение минуты
-            await asyncio.sleep(60)
+            # Ждем час
+            await asyncio.sleep(3600)
         
-        # Ждем 10 секунд перед следующей проверкой
+        # Ждем 50 секунд перед следующей проверкой
         await asyncio.sleep(50)
 
 def run_schedule():
