@@ -1,5 +1,6 @@
 # pip freeze > requirements.txt
 # установить pip install -r requirements.txt
+# проверка пуша
 
 
 import logging
@@ -2469,7 +2470,7 @@ async def schedule_worker():
         current_time = now.strftime("%H")
         logging.info(f"Текущее время: {current_time}")
         # Проверяем, нужно ли выполнить задачу
-        if current_time == "03":  
+        if current_time == "02":  
             try:
                 await send_daily_report()
                 await send_birthday_report()
@@ -2480,7 +2481,7 @@ async def schedule_worker():
                             text=f"Ошибка выполнения daily report: {e}", 
                             parse_mode="HTML", 
                             disable_web_page_preview=True
-                        )
+                        )git 
             
             # Ждем час
             await asyncio.sleep(3600)
@@ -2493,6 +2494,9 @@ def run_schedule():
     while True:
         schedule.run_pending()
         time.sleep(1)
+
+
+
 
 # Отчистка временных файлов
 async def clear_folder(folder_path):
