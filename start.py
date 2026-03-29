@@ -2481,7 +2481,7 @@ async def schedule_worker():
                             text=f"Ошибка выполнения daily report: {e}", 
                             parse_mode="HTML", 
                             disable_web_page_preview=True
-                        )git 
+                        )
             
             # Ждем час
             await asyncio.sleep(3600)
